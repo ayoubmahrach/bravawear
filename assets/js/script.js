@@ -3,10 +3,69 @@
 // Simple Cart Logic for Techwear
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialize lazy loading
+    initializeLazyLoading();
+    
     // Elements
     const addToCartBtn = document.querySelector('.order-btn');
     const cartIcon = document.querySelectorAll('.cart-btn, .floating-cart .cart-icon');
     const cartCountEls = document.querySelectorAll('.cart-count');
+
+    // Lazy Loading Implementation
+    function initializeLazyLoading() {
+        // Check if Intersection Observer is supported
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        loadImage(img);
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px', // Start loading 50px before image enters viewport
+                threshold: 0.01
+            });
+
+            // Observe all lazy images
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for older browsers - load all images immediately
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                loadImage(img);
+            });
+        }
+    }
+
+    function loadImage(img) {
+        const src = img.getAttribute('data-src');
+        if (!src) return;
+
+        // Create new image to preload
+        const newImg = new Image();
+        newImg.onload = function() {
+            img.src = src;
+            img.classList.remove('lazy');
+            img.classList.add('loaded');
+            
+            // Remove loading spinner if exists
+            const spinner = img.parentElement.querySelector('.lazy-spinner');
+            if (spinner) {
+                spinner.remove();
+            }
+            
+            console.log('Lazy loaded:', src);
+        };
+        newImg.onerror = function() {
+            console.error('Failed to load image:', src);
+            // Show error placeholder
+            img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
+        };
+        newImg.src = src;
+    }
 
     // Mobile Menu Toggle - Initialize first to ensure it works on all pages
     function initializeMobileMenu() {

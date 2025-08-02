@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brava - Your Ultimate Streetwear T-Shirt Store</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"></noscript>
     <style>
         /* Special Offer Card Styles */
         .special-offer-card {
@@ -309,8 +310,9 @@
             </div>
             <div class="product-grid">
                 <div class="product-card special-offer-card">
-                    <div class="product-image">
-                        <img src="assets/images/products/t-shirts-special.png" alt="Special Offer - Anime Collection Tee">
+                    <div class="product-image lazy-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PC9zdmc+" data-src="assets/images/products/t-shirts-special.png" alt="Special Offer - Anime Collection Tee" width="300" height="300" loading="lazy" class="lazy">
+                        <div class="lazy-spinner"></div>
                         <div class="product-price">
                             <div class="current-price">
                                 <span class="price-value">99</span><span class="price-period"> DH</span>
@@ -360,8 +362,9 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-image">
-                        <img src="assets/images/products/58.png" alt="Tufan Al-Aqsa Palestine Tee">
+                    <div class="product-image lazy-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PC9zdmc+" data-src="assets/images/products/58.png" alt="Tufan Al-Aqsa Palestine Tee" width="300" height="300" loading="lazy" class="lazy">
+                        <div class="lazy-spinner"></div>
                         <div class="product-price">
                             <span class="price-value">129</span><span class="price-period"> DH</span>
                         </div>
@@ -392,8 +395,9 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-image">
-                        <img src="assets/images/products/your-design.png" alt="Design Your Own Tee">
+                    <div class="product-image lazy-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PC9zdmc+" data-src="assets/images/products/your-design.png" alt="Design Your Own Tee" width="300" height="300" loading="lazy" class="lazy">
+                        <div class="lazy-spinner"></div>
                         <div class="product-price">
                             <span class="price-value">Starting from 99</span><span class="price-period"> DH</span>
                         </div>
@@ -620,7 +624,7 @@
         </div>
     </div>
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.min.js"></script>
     
     <script>
         // Show floating cart when items are in cart
