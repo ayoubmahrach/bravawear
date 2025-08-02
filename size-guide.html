@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Size Guide - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .size-guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 16px;
+        }
+        
+        .size-guide-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .size-guide-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .size-guide-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .size-guide-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .measurement-guide {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 30px;
+        }
+        
+        .measurement-guide h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .measurement-steps {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .measurement-steps li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .step-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .size-charts {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 30px;
+        }
+        
+        .size-charts h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .size-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .size-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+        
+        .size-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .size-table tr:hover {
+            background: #e9ecef;
+        }
+        
+        .size-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .size-note h4 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .size-note p {
+            color: #856404;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .fit-guide {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .fit-guide h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .fit-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .fit-option {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .fit-option h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .fit-option p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .contact-help {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .contact-help h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .contact-help p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        
+        .contact-btn.email {
+            background: #0078d4;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .size-guide-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .size-guide-header h1 {
+                font-size: 2rem;
+            }
+            
+            .size-table {
+                font-size: 0.8rem;
+            }
+            
+            .size-table th,
+            .size-table td {
+                padding: 8px 4px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy-policy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Size Guide</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">Size Guide</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <div class="size-guide-container">
+        <div class="size-guide-header">
+            <h1>Find Your Perfect Fit</h1>
+            <p>Our size guide is specifically designed for Moroccan body types to help you choose the perfect size for your Brava t-shirt.</p>
+        </div>
+
+        <div class="size-guide-content">
+            <div class="measurement-guide">
+                <h2><i class="fas fa-ruler"></i> How to Measure</h2>
+                <ul class="measurement-steps">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Chest Measurement</h4>
+                            <p>Measure around the fullest part of your chest, keeping the tape horizontal and snug but not tight.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Shoulder Width</h4>
+                            <p>Measure from the tip of one shoulder to the tip of the other shoulder across your back.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Length</h4>
+                            <p>Measure from the base of your neck (where the collar would sit) down to your desired length.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Sleeve Length</h4>
+                            <p>For short sleeves, measure from the shoulder seam to where you want the sleeve to end.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="size-charts">
+                <h2><i class="fas fa-table"></i> Size Chart</h2>
+                
+                <div class="size-note">
+                    <h4><i class="fas fa-info-circle"></i> Important Note</h4>
+                    <p>Our sizes are based on Moroccan body measurements. If you're between sizes, we recommend going up one size for a more comfortable fit.</p>
+                </div>
+
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Chest (cm)</th>
+                            <th>Shoulder (cm)</th>
+                            <th>Length (cm)</th>
+                            <th>Sleeve (cm)</th>
+                            <th>Fit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>S</strong></td>
+                            <td>88-96</td>
+                            <td>42-44</td>
+                            <td>68-70</td>
+                            <td>18-20</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M</strong></td>
+                            <td>96-104</td>
+                            <td>44-46</td>
+                            <td>70-72</td>
+                            <td>20-22</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>L</strong></td>
+                            <td>104-112</td>
+                            <td>46-48</td>
+                            <td>72-74</td>
+                            <td>22-24</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XL</strong></td>
+                            <td>112-120</td>
+                            <td>48-50</td>
+                            <td>74-76</td>
+                            <td>24-26</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XXL</strong></td>
+                            <td>120-128</td>
+                            <td>50-52</td>
+                            <td>76-78</td>
+                            <td>26-28</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3XL</strong></td>
+                            <td>128-136</td>
+                            <td>52-54</td>
+                            <td>78-80</td>
+                            <td>28-30</td>
+                            <td>Regular</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="size-note">
+                    <h4><i class="fas fa-tshirt"></i> Fit Guide</h4>
+                    <p><strong>Regular Fit:</strong> Standard fit with comfortable room around chest and shoulders. Perfect for everyday wear.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fit-guide">
+            <h2><i class="fas fa-magic"></i> Choosing Your Size</h2>
+            <div class="fit-options">
+                <div class="fit-option">
+                    <h4><i class="fas fa-user"></i> For a Relaxed Fit</h4>
+                    <p>Choose one size larger than your chest measurement indicates. This gives you extra room for comfort and layering.</p>
+                </div>
+                <div class="fit-option">
+                    <h4><i class="fas fa-user-tie"></i> For a Standard Fit</h4>
+                    <p>Choose the size that matches your chest measurement. This provides a classic, comfortable fit.</p>
+                </div>
+                <div class="fit-option">
+                    <h4><i class="fas fa-user-graduate"></i> For a Fitted Look</h4>
+                    <p>Choose one size smaller for a more fitted appearance. Perfect if you prefer a closer-to-body fit.</p>
+                </div>
+                <div class="fit-option">
+                    <h4><i class="fas fa-thermometer-half"></i> Consider Your Climate</h4>
+                    <p>In Morocco's warm climate, you might prefer a slightly looser fit for better airflow and comfort.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-help">
+            <h2><i class="fas fa-question-circle"></i> Need Help Choosing?</h2>
+            <p>Still unsure about your size? Our team is here to help you find the perfect fit!</p>
+            <div class="contact-buttons">
+                <a href="https://wa.me/212702209437?text=Hi! I need help choosing my size for Brava t-shirts. Can you help me?" class="contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    Ask on WhatsApp
+                </a>
+                <a href="mailto:brava.wear.official@hotmail.com?subject=Size Guide Help" class="contact-btn email">
+                    <i class="fas fa-envelope"></i>
+                    Email Us
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to get exclusive offers, new product alerts, and fashion updates</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>Brava</h2>
+                    </div>
+                    <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=anime">Anime</a></li>
+                        <li><a href="products.html?category=design-your-own">Design Your Own</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                        <li><a href="products.html?category=top-sellers">Top Sellers</a></li>
+                        <li><a href="products.html?category=on-sale">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Product Page Specific Styles */
+        .shop-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .product-wrapper {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        /* Filter Sidebar */
+        .filter-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 110px;
+            align-self: flex-start;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 25px;
+            max-height: calc(100vh - 150px);
+            overflow-y: auto;
+        }
+        
+        .filter-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            font-weight: 700;
+        }
+        
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        
+        .filter-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .filter-options {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .filter-options li {
+            margin-bottom: 10px;
+        }
+        
+        .filter-link {
+            display: block;
+            padding: 8px 15px;
+            color: #555;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .filter-link:hover, .filter-link.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Products Main Area */
+        .products-main {
+            flex: 1;
+        }
+        
+        .products-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .products-found {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .products-sort {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-label {
+            color: #666;
+        }
+        
+        .sort-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .sort-select:focus {
+            border-color: var(--primary-color);
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 220px;
+            background: #f9f9f9;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+        
+        .product-price {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .price-value {
+            color: var(--primary-color);
+        }
+        
+        .price-decimal {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #777;
+        }
+        
+        .sale-price {
+            color: #e74c3c !important;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+        
+        .sale-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 87, 34, 0.9);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            backdrop-filter: blur(5px);
+        }
+        
+        .product-image .sale-badge + .category-tag {
+            top: 45px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-tag {
+            background: #f0f0f0;
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .feature-tag i {
+            color: var(--primary-color);
+        }
+        
+        .product-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .action-btn {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            color: #e64a19;
+        }
+        
+        .action-btn i {
+            transition: transform 0.3s;
+        }
+        
+        .action-btn:hover i {
+            transform: translateX(4px);
+        }
+        
+        .wishlist-btn {
+            color: #777;
+            font-size: 1.2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            color: #E91E63;
+            transform: scale(1.1);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-header {
+            padding: 20px 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px 25px;
+        }
+        
+        .product-images {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .modal-image.active {
+            display: block;
+        }
+        
+        .image-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .image-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            opacity: 0.7;
+        }
+        
+        .image-thumbnail.active {
+            border-color: var(--primary-color);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .image-thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .modal-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .modal-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .modal-options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .option-select {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: white;
+        }
+        
+        .option-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .color-swatches {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .color-swatch.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8f8f8;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn-order {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c42);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+        }
+        
+        .btn-cancel {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #ddd;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-cancel:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        /* Loading Spinner Styles */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loading-spinner {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-spinner p {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        /* Customer Form Styles */
+        .customer-form {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .form-section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            margin-bottom: 15px;
+        }
+        
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* Price Summary Styles */
+        .price-summary {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .price-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .price-row.total {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .btn-order {
+            width: 100%;
+            padding: 15px 25px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-order:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal {
+                width: 95%;
+                max-height: 95vh;
+            }
+            
+            .modal-header {
+                padding: 15px 20px 0;
+            }
+            
+            .modal-body {
+                padding: 15px 20px;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .image-thumbnails {
+                justify-content: center;
+            }
+            
+            .image-thumbnail {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .form-row-2 {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .customer-form {
+                margin-top: 20px;
+                padding-top: 20px;
+            }
+            
+            .price-summary {
+                margin-top: 20px;
+                padding: 15px;
+            }
+        }
+        
+        /* Mobile Product Grid Fixes */
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .product-card {
+                margin-bottom: 0;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+            
+            .product-info {
+                padding: 15px;
+            }
+            
+            .product-title {
+                font-size: 1rem;
+            }
+            
+            .product-description {
+                font-size: 0.85rem;
+                -webkit-line-clamp: 2;
+            }
+            
+            .product-features {
+                gap: 5px;
+            }
+            
+            .feature-tag {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+            
+            .product-action {
+                margin-top: 15px;
+            }
+            
+            .action-btn {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+        
+        /* Mobile Menu Toggle */
+        .filter-toggle {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .product-wrapper {
+                flex-direction: column;
+            }
+            
+            .filter-sidebar {
+                flex: none;
+                width: 100%;
+                position: static;
+                max-height: none;
+                margin-bottom: 30px;
+                display: none;
+            }
+            
+            .filter-sidebar.active {
+                display: block;
+            }
+            
+            .filter-toggle {
+                display: flex;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html" class="active">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Our Products</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">Products</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="shop-container">
+            <!-- Mobile Filter Toggle -->
+            <button class="filter-toggle">
+                <i class="fas fa-filter"></i> Show Filters
+            </button>
+            
+            <div class="product-wrapper">
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar">
+                    <h2 class="filter-title">Categories</h2>
+                    
+                    <div class="filter-group">
+                        <ul class="filter-options">
+                            <li><a href="#" class="filter-link active" data-category="all">All Products</a></li>
+                            <li><a href="#" class="filter-link" data-category="anime">Anime</a></li>
+                            <li><a href="#" class="filter-link" data-category="design-your-own">Design Your Own</a></li>
+                            <li><a href="#" class="filter-link" data-category="streetwear">Streetwear</a></li>
+                            <li><a href="#" class="filter-link" data-category="top-sellers">Top Sellers</a></li>
+                            <li><a href="#" class="filter-link" data-category="on-sale">Special Offers</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                
+                <!-- Products Main Area -->
+                <div class="products-main">
+                    <div class="products-header">
+                        <div class="products-found">
+                            <strong id="products-count">16</strong> products found
+                        </div>
+                        <div class="products-sort">
+                            <span class="sort-label">Sort by:</span>
+                            <select class="sort-select" id="sort-select">
+                                <option value="featured">Featured</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name">Name: A to Z</option>
+                                <option value="name-desc">Name: Z to A</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid" id="products-grid">
+                        <!-- Products will be loaded here dynamically -->
+                                </div>
+                            </div>
+                                    </div>
+                                    </div>
+    </section>
+
+        <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Product Details</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                                </div>
+            <div class="modal-body">
+                <div class="product-images">
+                    <img class="modal-image active" id="modalImage" src="" alt="">
+                    <img class="modal-image" id="modalBackImage" src="" alt="">
+                    <img class="modal-image" id="modalImage3" src="" alt="">
+                    <img class="modal-image" id="modalImage4" src="" alt="">
+                    <img class="modal-image" id="modalImage5" src="" alt="">
+                    <img class="modal-image" id="modalImage6" src="" alt="">
+                                </div>
+                <div class="image-thumbnails" id="imageThumbnails">
+                    <img class="image-thumbnail active" id="thumbnail1" src="" alt="" onclick="showImage('front')">
+                    <img class="image-thumbnail" id="thumbnail2" src="" alt="" onclick="showImage('back')">
+                            </div>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-price" id="modalPrice"></div>
+                
+                <div class="modal-options">
+                    <div class="option-group">
+                        <label class="option-label">Size *</label>
+                        <select class="option-select" id="sizeSelect" required>
+                            <option value="">Choose Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                        </div>
+                        
+                    <div class="option-group">
+                        <label class="option-label">Color *</label>
+                        <div class="color-swatches" id="colorSwatches">
+                            <div class="color-swatch active" style="background-color: #000000;" data-color="Black"></div>
+                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="White"></div>
+                            <div class="color-swatch" style="background-color: #808080;" data-color="Gray"></div>
+                            <div class="color-swatch" style="background-color: #000080;" data-color="Navy"></div>
+                                </div>
+                            </div>
+                        
+                    <div class="option-group">
+                        <label class="option-label">Quantity *</label>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" class="quantity-input" id="quantityInput" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                                    </div>
+                                    </div>
+                                </div>
+                
+                <!-- Customer Information Form -->
+                <div class="customer-form">
+                    <h4 class="form-section-title">Customer Information</h4>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name *</label>
+                            <input type="text" class="form-input" id="fullName" required>
+                            </div>
+                        </div>
+                        
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="streetAddress">Street Address *</label>
+                            <input type="text" class="form-input" id="streetAddress" required placeholder="Street name and number">
+                                </div>
+                            </div>
+                        
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label class="form-label" for="city">City *</label>
+                            <input type="text" class="form-input" id="city" required>
+                                    </div>
+                        <div class="form-group">
+                            <label class="form-label" for="country">Country *</label>
+                            <input type="text" class="form-input" id="country" required value="Morocco">
+                            </div>
+                        </div>
+                        
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number *</label>
+                            <input type="tel" class="form-input" id="phone" required>
+                            </div>
+                        </div>
+                        
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="notes">Additional Notes (Optional)</label>
+                            <textarea class="form-input form-textarea" id="notes" placeholder="Any special instructions or preferences"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                <!-- Price Summary -->
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Product Price:</span>
+                        <span id="productPriceDisplay">0 DH</span>
+                                </div>
+                                        <div class="price-row">
+                        <span>Shipping Cost:</span>
+                        <span>15 DH</span>
+                            </div>
+                    <div class="price-row total">
+                        <span>Total:</span>
+                        <span id="totalPriceDisplay">15 DH</span>
+                        </div>
+                    </div>
+                    
+                <div class="modal-actions">
+                    <button class="btn-order" onclick="confirmOrder()">
+                        <i class="fas fa-check"></i>
+                        Confirm Order
+                    </button>
+                    <button class="btn-cancel" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to get exclusive offers, new product alerts, and style tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>Brava</h2>
+                    </div>
+                    <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=anime">Anime</a></li>
+                        <li><a href="products.html?category=design-your-own">Design Your Own</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                        <li><a href="products.html?category=top-sellers">Top Sellers</a></li>
+                        <li><a href="products.html?category=on-sale">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp phone number
+        const WHATSAPP_NUMBER = '212702209437';
+
+        // Product data
+        const products = [
+            {
+                id: 20,
+                name: "Special Offer - Anime Collection Tee",
+                price: "99",
+                originalPrice: "199",
+                currency: "DH",
+                image: "assets/images/products/t-shirts-special.png",
+                        backImage: "assets/images/products/1002-1.png",
+        images: ["assets/images/products/t-shirts-special.png", "assets/images/products/1002-1.png", "assets/images/products/plus100-3.png", "assets/images/products/1003.png"],
+                category: "top-sellers",
+                description: "🔥 SPECIAL OFFER: 50% OFF! Choose from 199+ amazing anime designs! This premium t-shirt features iconic characters from popular anime series. Perfect for anime fans and collectors. Get 1 for 99 DH or 2 for only 160 DH! Limited time offer with free shipping on orders of 2 or more.",
+                features: ["Anime", "Special Offer", "199+ Designs", "100% Cotton", "50% Off"]
+            },
+            {
+                id: 19,
+                name: "Design Your Own Tee",
+                price: "99",
+                displayPrice: "Starting from 99",
+                currency: "DH",
+                        image: "assets/images/products/your-design.png",
+        backImage: "assets/images/products/your-design.png",
+        images: ["assets/images/products/your-design.png"],
+                category: "top-sellers",
+                description: "Create your unique masterpiece with our 'Design Your Own' service! Starting from 99 DH, you can bring your vision to life on a premium cotton t-shirt. Perfect for personal expression, custom gifts, or brand merchandise. Contact us with your design idea and we'll help you create something truly special. Price varies based on design complexity and size.",
+                features: ["Custom Design", "Personalized", "Premium Quality", "100% Cotton", "Unique"]
+            },
+            {
+                id: 1,
+                name: "Roronoa Zoro - Pirate Hunter Tee",
+                price: "149",
+                currency: "DH",
+                image: "assets/images/products/1.png",
+                backImage: "assets/images/products/2.png",
+                category: "anime",
+                description: "Unleash your inner swordsman with the Roronoa Zoro 'Pirate Hunter' Tee. This premium black t-shirt features a bold, striking graphic of Zoro on the front with powerful Japanese script, and crossed katanas with 'Devil' characters on the back. With vibrant neon green accents and a 'Never Look Back' motto, this tee embodies Zoro's unwavering determination and iconic style. Perfect for anime enthusiasts and streetwear fans.",
+                features: ["Anime", "Big Design", "Streetwear", "100% Cotton"]
+            },
+            {
+                id: 2,
+                name: "Berserk - Brand of Sacrifice Tee",
+                price: "149",
+                currency: "DH",
+                image: "assets/images/products/7.png",
+                backImage: "assets/images/products/4.png",
+                images: ["assets/images/products/7.png", "assets/images/products/4.png", "assets/images/products/3.png", "assets/images/products/6.png", "assets/images/products/8.png", "assets/images/products/9.png"],
+                category: "top-sellers",
+                description: "Embrace the darkness with the Berserk 'Brand of Sacrifice' Tee. This premium t-shirt features the iconic Brand of Sacrifice symbol on the front - a powerful, distressed red mark that represents Guts' cursed destiny. The back showcases a detailed graphic with Guts' fierce character illustrations, Japanese calligraphy reading '狂気の根性' (Madness's Guts), and the legendary BERSERK logo. Available in black, white, and grey, this tee captures the raw intensity and dark fantasy aesthetic of the legendary manga series. Perfect for true Berserk fans and those who appreciate bold, statement-making streetwear.",
+                features: ["Anime", "Big Design", "Streetwear", "100% Cotton", "Dark Fantasy"]
+            },
+            {
+                id: 3,
+                name: "Jujutsu Kaisen - Behind Tee",
+                price: "149",
+                currency: "DH",
+                image: "assets/images/products/10.png",
+                backImage: "assets/images/products/11.png",
+                images: ["assets/images/products/10.png", "assets/images/products/11.png", "assets/images/products/12.png", "assets/images/products/13.png", "assets/images/products/14.png", "assets/images/products/15.png"],
+                category: "anime",
+                description: "Step into the world of curses and sorcerers with the Jujutsu Kaisen 'Behind' Tee. This premium t-shirt features a captivating design inspired by the dark and thrilling universe of Jujutsu Kaisen. The front showcases a subtle yet striking graphic with Japanese characters '天逆鉾' (Heavenly Reverse Spear), while the back displays a dramatic character illustration with the powerful 'BEHIND' text and 'TO THE ONE WHO LEFT IT ALL' message. Available in black, white, and grey, this tee is perfect for fans who appreciate the series' unique blend of action and supernatural elements.",
+                features: ["Anime", "Big Design", "Streetwear", "100% Cotton", "Mysterious Design"]
+            },
+            {
+                id: 4,
+                name: "Salgoat - Rapper El Grand Toto Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/23.png",
+                backImage: "assets/images/products/22.png",
+                images: ["assets/images/products/23.png", "assets/images/products/24.png", "assets/images/products/25.png", "assets/images/products/22.png"],
+                category: "top-sellers",
+                description: "Represent the iconic Salgoat brand with this premium t-shirt featuring the signature 'SALGOAT' design. This bold streetwear piece showcases a striking graphic with a stylized monster face and the distinctive 'SXLGOAT' text on the back. The front displays the clean 'SALGOAT' logo in a distressed, graffiti-style font. Available in black, white, and grey, this tee embodies the raw, edgy aesthetic that defines modern streetwear culture. Perfect for fans of bold designs and those who appreciate authentic urban fashion.",
+                features: ["Streetwear", "Big Design", "Graffiti Style", "100% Cotton", "Bold Design"]
+            },
+            {
+                id: 5,
+                name: "Itachi Uchiha - Naruto Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/19.png",
+                backImage: "assets/images/products/20.png",
+                images: ["assets/images/products/19.png", "assets/images/products/20.png"],
+                category: "anime",
+                description: "Embrace the power of the Uchiha clan with this premium Itachi Uchiha t-shirt. This striking design features the legendary ninja with his iconic Sharingan eye glowing red, wearing his signature Akatsuki cloak with red cloud patterns. The back showcases a dramatic graphic with Itachi's intense red eyes and the distinctive Akatsuki cloud motifs. Perfect for Naruto fans who appreciate the complex character of Itachi Uchiha and his mysterious, powerful presence in the series.",
+                features: ["Anime", "Big Design", "Naruto", "100% Cotton", "Sharingan Design"]
+            },
+            {
+                id: 6,
+                name: "Zaman Tee",
+                price: "149",
+                currency: "DH",
+                image: "assets/images/products/26.png",
+                backImage: "assets/images/products/26.png",
+                images: ["assets/images/products/26.png"],
+                category: "streetwear",
+                description: "Celebrate culture and heritage with the 'Zaman' tee. This premium t-shirt features a bold Arabic calligraphy design with intricate patterns, making a statement of tradition and modern streetwear fusion. Perfect for those who appreciate meaningful art and unique style.",
+                features: ["Streetwear", "Arabic Calligraphy", "Cultural", "100% Cotton", "Bold Design"]
+            },
+            {
+                id: 7,
+                name: "Japanese Art Tee",
+                price: "149",
+                currency: "DH",
+                image: "assets/images/products/27.png",
+                backImage: "assets/images/products/28.png",
+                images: ["assets/images/products/27.png", "assets/images/products/28.png"],
+                category: "streetwear",
+                description: "Showcase your love for Japanese art and street culture with this striking tee. Featuring a dramatic skull and rose motif with Japanese characters and a bold red sun, this shirt blends traditional and modern influences for a truly unique look. Perfect for fans of Japanese aesthetics and statement streetwear.",
+                features: ["Streetwear", "Japanese Art", "Skull Design", "100% Cotton", "Bold Graphic"]
+            },
+            {
+                id: 8,
+                name: "Tufan Al-Aqsa Palestine Tee",
+                price: "129",
+                currency: "DH",
+                image: "assets/images/products/58.png",
+                backImage: "assets/images/products/59.png",
+                images: ["assets/images/products/58.png", "assets/images/products/59.png"],
+                category: "streetwear",
+                description: "Stand in solidarity with Palestine with this powerful 'Tufan Al-Aqsa' Tee. This premium black t-shirt features a striking graphic with bold Arabic calligraphy for 'طوفان' (Tufan - Flood/Deluge) overlaid on the silhouette of a masked figure holding a rifle, set against an inverted red triangle. This tee is a bold statement of support and awareness, crafted for those who advocate for human rights and peace.",
+                features: ["Streetwear", "Big Design", "Solidarity", "100% Cotton", "Cultural Significance"]
+            },
+            {
+                id: 9,
+                name: "Tufan Al-Aqsa Palestine-2 Tee",
+                price: "129",
+                currency: "DH",
+                image: "assets/images/products/57.png",
+                backImage: "assets/images/products/57.png",
+                images: ["assets/images/products/57.png"],
+                category: "streetwear",
+                description: "Show your solidarity with the 'Tufan Al-Aqsa Palestine-2' Tee. This powerful black t-shirt features a striking design with bold Arabic calligraphy and symbolic imagery representing Palestinian resistance and hope. Made from premium 100% cotton, this tee is a statement piece for those who stand for justice and freedom.",
+                features: ["Streetwear", "Big Design", "Solidarity", "100% Cotton", "Cultural Significance"]
+            },
+            {
+                id: 10,
+                name: "Tufan Al-Aqsa Palestine-3 Tee",
+                price: "129",
+                currency: "DH",
+                image: "assets/images/products/52.png",
+                backImage: "assets/images/products/53.png",
+                images: ["assets/images/products/52.png", "assets/images/products/53.png", "assets/images/products/54.png"],
+                category: "streetwear",
+                description: "Express your support with the 'Tufan Al-Aqsa Palestine-3' Tee. This premium black t-shirt features powerful graphics including the iconic map of Palestine with messages like 'FREE PALESTINE' and 'FROM THE RIVER TO THE SEA', a fist holding the key of return, and other powerful symbols of resistance. Made from premium 100% cotton, this tee is a bold statement piece.",
+                features: ["Streetwear", "Big Design", "Solidarity", "100% Cotton", "Cultural Significance"]
+            },
+            {
+                id: 11,
+                name: "Palestine Tee",
+                price: "129",
+                currency: "DH",
+                image: "assets/images/products/37.png",
+                backImage: "assets/images/products/38.png",
+                images: ["assets/images/products/37.png", "assets/images/products/38.png"],
+                category: "top-sellers",
+                description: "Show your support with the 'Palestine' Tee. This premium black t-shirt features a stylized map of Palestine filled with a black and white checkered pattern reminiscent of a keffiyeh, alongside white Arabic calligraphy. This tee is a powerful statement of solidarity and cultural pride, perfect for those who stand for justice and human rights.",
+                features: ["Streetwear", "Big Design", "Solidarity", "100% Cotton", "Cultural Significance"]
+            },
+            {
+                id: 12,
+                name: "Palestine-2 Tee",
+                price: "129",
+                currency: "DH",
+                image: "assets/images/products/65.png",
+                backImage: "assets/images/products/65.png",
+                images: ["assets/images/products/65.png"],
+                category: "streetwear",
+                description: "Stand with Palestine with the 'Palestine-2' Tee. This premium black t-shirt features a striking graphic that declares 'WE STAND WITH PALESTINE' and 'STOP GENOCIDE'. The central design showcases the iconic Dome of the Rock overlaid with the map of Palestine, symbolizing resilience and heritage. This tee is a bold statement of support and awareness.",
+                features: ["Streetwear", "Big Design", "Solidarity", "100% Cotton", "Cultural Significance"]
+            },
+            {
+                id: 13,
+                name: "Rise Again Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/35.png",
+                backImage: "assets/images/products/36.png",
+                images: ["assets/images/products/35.png", "assets/images/products/36.png"],
+                category: "streetwear",
+                description: "Embrace resilience with the 'Rise Again' tee. This premium t-shirt features a powerful graphic with traditional Persian rug patterns and the message 'Rise Again' overlaid with text about resilience and defiance. Perfect for those who overcome challenges and inspire hope.",
+                features: ["Streetwear", "Motivational", "Bold Graphic", "100% Cotton", "Resilience"]
+            },
+            {
+                id: 14,
+                name: "Cupud Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/40.png",
+                backImage: "assets/images/products/39.png",
+                images: ["assets/images/products/40.png", "assets/images/products/39.png"],
+                category: "streetwear",
+                description: "Unleash your playful side with the 'Cupud' tee. This unique t-shirt features a whimsical and artistic design with the word 'CUPID' and modern typography. Perfect for those who love creative and expressive streetwear with a touch of romance.",
+                features: ["Streetwear", "Artistic Design", "Unique", "100% Cotton", "Creative"]
+            },
+            {
+                id: 15,
+                name: "Breaking Bad Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/66.png",
+                backImage: "assets/images/products/67.png",
+                images: ["assets/images/products/66.png", "assets/images/products/67.png"],
+                category: "streetwear",
+                description: "Cook up some style with the 'Breaking Bad' tee. This iconic t-shirt features a design inspired by the legendary series with Walter White, Jesse Pinkman, and Mike Ehrmantraut. A must-have for pop culture enthusiasts and streetwear collectors.",
+                features: ["Streetwear", "Pop Culture", "TV Series", "100% Cotton", "Iconic Design"]
+            },
+            {
+                id: 16,
+                name: "Music Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/61.png",
+                backImage: "assets/images/products/62.png",
+                images: ["assets/images/products/61.png", "assets/images/products/62.png"],
+                category: "streetwear",
+                description: "Feel the rhythm with the 'Music' tee. This stylish t-shirt features a dynamic design with Arabic calligraphy and musical elements. Perfect for audiophiles and those who live life to a beat. Express your passion for music through fashion.",
+                features: ["Streetwear", "Music Theme", "Dynamic Design", "100% Cotton", "Arabic Calligraphy"]
+            },
+            {
+                id: 17,
+                name: "Taachira Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/55.png",
+                backImage: "assets/images/products/56.png",
+                images: ["assets/images/products/55.png", "assets/images/products/56.png"],
+                category: "streetwear",
+                description: "Embark on a journey of dreams with the 'Taachira' (Visa) tee. This premium t-shirt features a unique collage of travel documents, airport motifs, and aspirational Arabic and English text, symbolizing ambition and new beginnings. Perfect for globetrotters and dreamers alike.",
+                features: ["Streetwear", "Travel Theme", "Aspirational", "100% Cotton", "Cultural"]
+            },
+            {
+                id: 18,
+                name: "Arabic Art Tee",
+                price: "139",
+                currency: "DH",
+                image: "assets/images/products/50.png",
+                backImage: "assets/images/products/49.png",
+                images: ["assets/images/products/50.png", "assets/images/products/49.png"],
+                category: "streetwear",
+                description: "Adorn yourself with the beauty of heritage with the 'Arabic Art' tee. This premium t-shirt showcases intricate Arabic calligraphy and traditional patterns, blending cultural richness with contemporary streetwear style. A timeless piece for art enthusiasts.",
+                features: ["Streetwear", "Arabic Calligraphy", "Cultural", "100% Cotton", "Artistic"]
+            }
+        ];
+
+        // Category display names
+        const categoryNames = {
+            'all': 'All Products',
+            'anime': 'Anime',
+            'design-your-own': 'Design Your Own',
+            'streetwear': 'Streetwear',
+            'top-sellers': 'Top Sellers',
+            'on-sale': 'Special Offers'
+        };
+
+        // Global variables
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+        let filteredProducts = [...products];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
+            initializeFilters();
+            initializeSort();
+            initializeMobileMenu();
+        });
+
+        // Display products
+        function displayProducts() {
+            const productsGrid = document.getElementById('products-grid');
+            const productsCount = document.getElementById('products-count');
+            
+            // Clear existing products
+            productsGrid.innerHTML = '';
+            
+            // Update products count
+            productsCount.textContent = filteredProducts.length;
+            
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No products found</h3>
+                        <p>Try selecting a different category or browse all products.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Generate product cards
+            filteredProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Create product card
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            // Create WhatsApp order link
+            const whatsappText = `I want to order ${product.name}`;
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
+            
+            // Get category display name
+            const categoryDisplayName = categoryNames[product.category] || product.category;
+            
+            // Format price
+            const priceParts = product.price.split('.');
+            const priceValue = priceParts[0];
+            const priceDecimal = priceParts.length > 1 ? priceParts[1] : '00';
+            
+            // Handle display price (for custom products)
+            let priceDisplay;
+            if (product.displayPrice) {
+                priceDisplay = `<span class="price-value">${product.displayPrice}</span>`;
+            } else {
+                priceDisplay = `<span class="price-value">${product.currency === 'USD' ? '$' : ''}${priceValue}</span><span class="price-decimal">.${priceDecimal}</span>`;
+            }
+            
+            let saleBadge = '';
+            
+            if (product.originalPrice) {
+                const originalParts = product.originalPrice.split('.');
+                const originalValue = originalParts[0];
+                const originalDecimal = originalParts.length > 1 ? originalParts[1] : '00';
+                priceDisplay = `
+                    <span class="price-value sale-price">${product.currency === 'USD' ? '$' : ''}${priceValue}</span><span class="price-decimal">.${priceDecimal}</span>
+                    <span class="original-price">${product.currency === 'USD' ? '$' : ''}${originalValue}.${originalDecimal}</span>
+                `;
+                saleBadge = '<div class="sale-badge">SALE</div>';
+            }
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='img/product-placeholder.jpg'">
+                    <div class="product-price">
+                        ${priceDisplay}
+                    </div>
+                    ${saleBadge}
+                    <div class="category-tag">${categoryDisplayName}</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-features">
+                        ${product.features.map(feature => `
+                            <div class="feature-tag">
+                                <i class="fas fa-tshirt"></i> ${feature}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="product-action">
+                        <button class="action-btn" onclick="openModalForProduct(${product.id})">
+                            Show Details <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            if (category === 'all') {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => product.category === category);
+            }
+            
+            // Apply current sort
+            sortProducts(currentSort);
+            
+            displayProducts();
+        }
+
+        // Sort products
+        function sortProducts(sortType) {
+            currentSort = sortType;
+            
+            switch (sortType) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+                    break;
+                case 'name':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                default:
+                    // Featured - keep original order
+                    break;
+            }
+            
+            displayProducts();
+        }
+
+        // Initialize filter buttons
+        function initializeFilters() {
+            const filterLinks = document.querySelectorAll('.filter-link');
+            
+            filterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    filterLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Filter products
+                    const category = this.dataset.category;
+                    filterProducts(category);
+                });
+            });
+        }
+
+        // Initialize sort dropdown
+        function initializeSort() {
+            const sortSelect = document.getElementById('sort-select');
+            
+            sortSelect.addEventListener('change', function() {
+                sortProducts(this.value);
+            });
+        }
+
+        // Toggle wishlist
+        function toggleWishlist(button) {
+            const icon = button.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = '#E91E63';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                }
+        }
+
+        // Initialize mobile menu
+        function initializeMobileMenu() {
+        // Toggle filter sidebar on mobile
+        const filterToggle = document.querySelector('.filter-toggle');
+        const filterSidebar = document.querySelector('.filter-sidebar');
+        
+        if (filterToggle && filterSidebar) {
+            filterToggle.addEventListener('click', () => {
+                filterSidebar.classList.toggle('active');
+                filterToggle.innerHTML = filterSidebar.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i> Hide Filters' 
+                    : '<i class="fas fa-filter"></i> Show Filters';
+            });
+        }
+        }
+
+        // Modal functionality
+        let currentProduct = null;
+        let selectedSize = '';
+        let selectedColor = 'Black';
+        let selectedQuantity = 1;
+        const SHIPPING_COST = 15; // Fixed shipping cost in DH
+
+        function showProductModal(productId) {
+            // First, ensure any existing modal is properly closed
+            closeModal();
+            
+            // Wait a brief moment to ensure modal is fully closed
+            setTimeout(() => {
+                openProductModal(productId);
+            }, 50);
+        }
+        
+        function openProductModal(productId) {
+            console.log('openProductModal called with productId:', productId);
+            
+            // Ensure productId is a number
+            productId = parseInt(productId);
+            console.log('Parsed productId:', productId);
+            
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                console.log('Product not found for id:', productId);
+                console.log('Available products:', products.map(p => ({id: p.id, name: p.name})));
+                return;
+            }
+
+            console.log('Found product:', product.name);
+            currentProduct = product;
+            
+            // Populate modal content
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalImage').alt = product.name;
+            document.getElementById('modalDescription').textContent = product.description;
+            
+            // Display price in modal
+            if (product.displayPrice) {
+                document.getElementById('modalPrice').textContent = `${product.displayPrice} ${product.currency}`;
+                } else {
+                document.getElementById('modalPrice').textContent = `${product.currency} ${product.price}`;
+            }
+            
+            // Reset form
+            document.getElementById('sizeSelect').value = '';
+            document.getElementById('quantityInput').value = '1';
+            document.getElementById('fullName').value = '';
+            document.getElementById('streetAddress').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('country').value = 'Morocco';
+            document.getElementById('phone').value = '';
+            document.getElementById('notes').value = '';
+            
+            selectedSize = '';
+            selectedColor = 'Black';
+            selectedQuantity = 1;
+            
+            // Reset color swatches
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.remove('active');
+            });
+            const blackSwatch = document.querySelector('.color-swatch[data-color="Black"]');
+            if (blackSwatch) {
+                blackSwatch.classList.add('active');
+            }
+            
+            // Update price display
+            updatePriceDisplay();
+            
+            // Set thumbnails
+            document.getElementById('thumbnail1').src = product.image;
+            document.getElementById('thumbnail1').alt = product.name + ' (Front)';
+            
+            // Set back image and thumbnail if available
+            if (product.backImage) {
+                document.getElementById('modalBackImage').src = product.backImage;
+                document.getElementById('modalBackImage').alt = product.name + ' (Back)';
+                document.getElementById('thumbnail2').src = product.backImage;
+                document.getElementById('thumbnail2').alt = product.name + ' (Back)';
+            }
+            
+            // Handle multiple images for Berserk product
+            if (product.images && product.images.length > 2) {
+                const thumbnailsContainer = document.getElementById('imageThumbnails');
+                thumbnailsContainer.innerHTML = '';
+                
+                product.images.forEach((image, index) => {
+                    const thumbnail = document.createElement('img');
+                    thumbnail.className = `image-thumbnail ${index === 0 ? 'active' : ''}`;
+                    thumbnail.src = image;
+                    thumbnail.alt = `${product.name} (Image ${index + 1})`;
+                    thumbnail.onclick = () => showImage(index);
+                    thumbnailsContainer.appendChild(thumbnail);
+                    
+                    // Set modal images
+                    if (index < 6) {
+                        const modalImage = document.getElementById(`modalImage${index === 0 ? '' : index === 1 ? 'BackImage' : index + 1}`);
+                        if (modalImage) {
+                            modalImage.src = image;
+                            modalImage.alt = `${product.name} (Image ${index + 1})`;
+                        }
+                    }
+                });
+            }
+            
+            // Show modal
+            const modal = document.getElementById('productModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal should now be visible');
+        }
+
+        function closeModal() {
+            console.log('closeModal called');
+            const modal = document.getElementById('productModal');
+            
+            // Remove active class
+            modal.classList.remove('active');
+            
+            // Reset body overflow
+            document.body.style.overflow = 'auto';
+            
+            // Reset current product
+            currentProduct = null;
+            
+            // Reset form values
+            if (document.getElementById('sizeSelect')) {
+                document.getElementById('sizeSelect').value = '';
+            }
+            if (document.getElementById('quantityInput')) {
+                document.getElementById('quantityInput').value = '1';
+            }
+            if (document.getElementById('fullName')) {
+                document.getElementById('fullName').value = '';
+            }
+            if (document.getElementById('streetAddress')) {
+                document.getElementById('streetAddress').value = '';
+            }
+            if (document.getElementById('city')) {
+                document.getElementById('city').value = '';
+            }
+            if (document.getElementById('country')) {
+                document.getElementById('country').value = 'Morocco';
+            }
+            if (document.getElementById('phone')) {
+                document.getElementById('phone').value = '';
+            }
+            if (document.getElementById('notes')) {
+                document.getElementById('notes').value = '';
+            }
+            
+            // Reset selected values
+            selectedSize = '';
+            selectedColor = 'Black';
+            selectedQuantity = 1;
+            
+            console.log('Modal closed and all state reset');
+        }
+
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantityInput');
+            let value = parseInt(input.value) + delta;
+            value = Math.max(1, Math.min(10, value));
+            input.value = value;
+            selectedQuantity = value;
+            updatePriceDisplay();
+        }
+
+        function updatePriceDisplay() {
+            if (!currentProduct) return;
+            
+            const productPrice = parseFloat(currentProduct.price);
+            const totalProductPrice = productPrice * selectedQuantity;
+            const totalPrice = totalProductPrice + SHIPPING_COST;
+            
+            document.getElementById('productPriceDisplay').textContent = `${totalProductPrice} ${currentProduct.currency}`;
+            document.getElementById('totalPriceDisplay').textContent = `${totalPrice} ${currentProduct.currency}`;
+        }
+
+
+
+        // Initialize event listeners when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded - initializing event listeners');
+            
+            // Initialize modal close functionality
+            const modal = document.getElementById('productModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            // Initialize color swatches with event delegation
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('color-swatch')) {
+            const colorSwatches = document.querySelectorAll('.color-swatch');
+                    colorSwatches.forEach(s => s.classList.remove('active'));
+                    e.target.classList.add('active');
+                    selectedColor = e.target.dataset.color;
+                    console.log('Color selected:', selectedColor);
+                }
+                
+                // Handle thumbnail clicks
+                if (e.target.classList.contains('image-thumbnail')) {
+                    const thumbnails = document.querySelectorAll('.image-thumbnail');
+                    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    // Find the index of the clicked thumbnail
+                    const index = Array.from(thumbnails).indexOf(e.target);
+                    showImage(index);
+                }
+            });
+            
+            // Initialize quantity input with event delegation
+            document.addEventListener('change', function(e) {
+                if (e.target.id === 'quantityInput') {
+                    selectedQuantity = parseInt(e.target.value);
+                updatePriceDisplay();
+                    console.log('Quantity changed to:', selectedQuantity);
+                }
+                
+                if (e.target.id === 'sizeSelect') {
+                    selectedSize = e.target.value;
+                    console.log('Size selected:', selectedSize);
+                }
+            });
+            
+            console.log('All event listeners initialized');
+        });
+
+        // Telegram Bot Configuration
+        const TELEGRAM_BOTS = [
+            {
+                token: '7947780928:AAFEPb53SDHgGXL0kzJrFTQmryMi1cZVIc8',
+                chatId: '1394304682'
+            },
+            {
+                token: '6918734144:AAEAAckbx8tWjPmWRHi6RoGJ3ScsQMv8txU',
+                chatId: '6106156336'
+            }
+        ];
+
+        // Show loading spinner
+        function showLoading() {
+            const modal = document.getElementById('productModal');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loadingOverlay';
+            loadingDiv.innerHTML = `
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Processing your order...</p>
+                </div>
+            `;
+            modal.appendChild(loadingDiv);
+        }
+
+        // Hide loading spinner
+        function hideLoading() {
+            const loadingDiv = document.getElementById('loadingOverlay');
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+
+        // Send message to Telegram bot
+        async function sendToTelegram(botToken, chatId, message) {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Telegram response:', result);
+                return result.ok;
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+                return false;
+            }
+        }
+
+        // Confirm order function
+        async function confirmOrder() {
+            // Validate required fields
+            const fullName = document.getElementById('fullName').value.trim();
+            const streetAddress = document.getElementById('streetAddress').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const country = document.getElementById('country').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!fullName || !streetAddress || !city || !country || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            if (!currentProduct) {
+                alert('No product selected');
+                return;
+            }
+
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
+            }
+
+            // Calculate total price
+            const productPrice = parseFloat(currentProduct.price);
+            const totalProductPrice = productPrice * selectedQuantity;
+            const totalPrice = totalProductPrice + SHIPPING_COST;
+
+            // Show loading spinner
+            showLoading();
+
+            // Create order message
+            const orderMessage = `🛍️ <b>NEW ORDER - Brava Streetwear</b>
+
+<b>Product Details:</b>
+• Product: ${currentProduct.name}
+• Price: ${currentProduct.currency} ${productPrice}
+• Size: ${selectedSize}
+• Color: ${selectedColor}
+• Quantity: ${selectedQuantity}
+• Subtotal: ${currentProduct.currency} ${totalProductPrice}
+
+<b>Customer Information:</b>
+• Name: ${fullName}
+• Address: ${streetAddress}, ${city}, ${country}
+• Phone: ${phone}
+${notes ? `• Notes: ${notes}` : ''}
+
+<b>Order Summary:</b>
+• Product Subtotal: ${currentProduct.currency} ${totalProductPrice}
+• Shipping Cost: ${currentProduct.currency} ${SHIPPING_COST}
+• <b>Total: ${currentProduct.currency} ${totalPrice}</b>
+
+Please process this order. Thank you! 🚀`;
+
+            // Send to both Telegram bots
+            const sendPromises = TELEGRAM_BOTS.map(bot => 
+                sendToTelegram(bot.token, bot.chatId, orderMessage)
+            );
+
+            try {
+                await Promise.all(sendPromises);
+                console.log('Order sent to Telegram bots successfully');
+            } catch (error) {
+                console.error('Error sending order:', error);
+            }
+
+            // Wait 2 seconds to show processing
+            setTimeout(() => {
+                hideLoading();
+                
+                // Redirect to thank you page with order details
+                const params = new URLSearchParams({
+                    product: currentProduct.name,
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity: selectedQuantity,
+                    total: totalPrice,
+                    customer: fullName
+                });
+                
+                window.location.href = `thank-you.html?${params.toString()}`;
+            }, 2000);
+        }
+
+        function showImage(type) {
+            console.log('showImage called with:', type);
+            
+            // Hide all modal images
+            const modalImages = document.querySelectorAll('.modal-image');
+            modalImages.forEach(img => img.classList.remove('active'));
+            
+            // Remove active class from all thumbnails
+            const thumbnails = document.querySelectorAll('.image-thumbnail');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            let imageIndex = 0;
+            
+            if (typeof type === 'number') {
+                // Handle multiple images (Berserk product)
+                imageIndex = type;
+            } else if (type === 'front') {
+                imageIndex = 0;
+            } else if (type === 'back') {
+                imageIndex = 1;
+            }
+            
+            console.log('Showing image at index:', imageIndex);
+            
+            // Show selected image
+            let modalImage;
+            if (imageIndex === 0) {
+                modalImage = document.getElementById('modalImage');
+            } else if (imageIndex === 1) {
+                modalImage = document.getElementById('modalBackImage');
+            } else {
+                modalImage = document.getElementById(`modalImage${imageIndex + 1}`);
+            }
+            
+            if (modalImage) {
+                modalImage.classList.add('active');
+                console.log('Activated modal image:', modalImage.src);
+            } else {
+                console.log('Modal image not found for index:', imageIndex);
+            }
+            
+            // Activate corresponding thumbnail
+            if (thumbnails[imageIndex]) {
+                thumbnails[imageIndex].classList.add('active');
+                console.log('Activated thumbnail:', thumbnails[imageIndex].src);
+            } else {
+                console.log('Thumbnail not found for index:', imageIndex);
+            }
+        }
+        
+        // New simplified modal function
+        function openModalForProduct(productId) {
+            console.log('openModalForProduct called with:', productId);
+            
+            // Find the product
+            const product = products.find(p => p.id === parseInt(productId));
+            if (!product) {
+                console.error('Product not found:', productId);
+                return;
+            }
+            
+            // Set current product
+            currentProduct = product;
+            
+            // Update modal content
+            const modal = document.getElementById('productModal');
+            const title = document.getElementById('modalTitle');
+            const image = document.getElementById('modalImage');
+            const description = document.getElementById('modalDescription');
+            const price = document.getElementById('modalPrice');
+            
+            if (title) title.textContent = product.name;
+            if (image) {
+                image.src = product.image;
+                image.alt = product.name;
+            }
+            if (description) description.textContent = product.description;
+            if (price) {
+                if (product.displayPrice) {
+                    price.textContent = `${product.displayPrice} ${product.currency}`;
+                } else {
+                    price.textContent = `${product.currency} ${product.price}`;
+                }
+            }
+            
+            // Handle images and thumbnails
+            setupProductImages(product);
+            
+            // Reset form
+            const formElements = ['sizeSelect', 'quantityInput', 'fullName', 'streetAddress', 'city', 'phone', 'notes'];
+            formElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (id === 'quantityInput') {
+                        element.value = '1';
+                    } else if (id === 'country') {
+                        element.value = 'Morocco';
+                    } else {
+                        element.value = '';
+                    }
+                }
+            });
+            
+            // Reset color swatches
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.remove('active');
+            });
+            const blackSwatch = document.querySelector('.color-swatch[data-color="Black"]');
+            if (blackSwatch) blackSwatch.classList.add('active');
+            
+            // Reset variables
+            selectedSize = '';
+            selectedColor = 'Black';
+            selectedQuantity = 1;
+            
+            // Update price display
+            updatePriceDisplay();
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal opened for:', product.name);
+        }
+        
+        // Function to setup product images and thumbnails
+        function setupProductImages(product) {
+            console.log('Setting up images for:', product.name);
+            
+            // Set main image and first thumbnail
+            const mainImage = document.getElementById('modalImage');
+            const thumbnail1 = document.getElementById('thumbnail1');
+            
+            if (mainImage) {
+                mainImage.src = product.image;
+                mainImage.alt = product.name + ' (Front)';
+                mainImage.classList.add('active');
+            }
+            
+            if (thumbnail1) {
+                thumbnail1.src = product.image;
+                thumbnail1.alt = product.name + ' (Front)';
+                thumbnail1.classList.add('active');
+            }
+            
+            // Hide all other modal images initially
+            const modalImages = document.querySelectorAll('.modal-image');
+            modalImages.forEach((img, index) => {
+                if (index > 0) {
+                    img.classList.remove('active');
+                }
+            });
+            
+            // Handle back image if available
+            if (product.backImage) {
+                const backImage = document.getElementById('modalBackImage');
+                const thumbnail2 = document.getElementById('thumbnail2');
+                
+                if (backImage) {
+                    backImage.src = product.backImage;
+                    backImage.alt = product.name + ' (Back)';
+                }
+                
+                if (thumbnail2) {
+                    thumbnail2.src = product.backImage;
+                    thumbnail2.alt = product.name + ' (Back)';
+                    thumbnail2.style.display = 'block';
+                }
+            } else {
+                // Hide second thumbnail if no back image
+                const thumbnail2 = document.getElementById('thumbnail2');
+                if (thumbnail2) {
+                    thumbnail2.style.display = 'none';
+                }
+            }
+            
+            // Handle multiple images (like Berserk product)
+            if (product.images && product.images.length > 2) {
+                console.log('Setting up multiple images:', product.images.length);
+                setupMultipleImages(product);
+            } else {
+                // Clear any existing multiple image thumbnails
+                const thumbnailsContainer = document.getElementById('imageThumbnails');
+                if (thumbnailsContainer) {
+                    // Keep only the first two thumbnails (front and back)
+                    const existingThumbnails = thumbnailsContainer.querySelectorAll('.image-thumbnail');
+                    existingThumbnails.forEach((thumb, index) => {
+                        if (index >= 2) {
+                            thumb.remove();
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Function to setup multiple images
+        function setupMultipleImages(product) {
+            const thumbnailsContainer = document.getElementById('imageThumbnails');
+            if (!thumbnailsContainer) return;
+            
+            // Clear existing thumbnails
+            thumbnailsContainer.innerHTML = '';
+            
+            // Create thumbnails for all images
+            product.images.forEach((image, index) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.className = `image-thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.src = image;
+                thumbnail.alt = `${product.name} (Image ${index + 1})`;
+                thumbnail.onclick = () => showImage(index);
+                thumbnailsContainer.appendChild(thumbnail);
+                
+                // Set modal images
+                if (index < 6) {
+                    let modalImage;
+                    if (index === 0) {
+                        modalImage = document.getElementById('modalImage');
+                    } else if (index === 1) {
+                        modalImage = document.getElementById('modalBackImage');
+                    } else {
+                        modalImage = document.getElementById(`modalImage${index + 1}`);
+                    }
+                    
+                    if (modalImage) {
+                        modalImage.src = image;
+                        modalImage.alt = `${product.name} (Image ${index + 1})`;
+                    }
+                }
+            });
+        }
+        
+        // Test function for debugging
+        function testModal() {
+            console.log('Testing modal with first product');
+            if (products.length > 0) {
+                openModalForProduct(products[0].id);
+            } else {
+                console.log('No products available');
+            }
+        }
+        
+        // Make test function globally available
+        window.testModal = testModal;
+        </script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

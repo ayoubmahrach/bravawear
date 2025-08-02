@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF5722;
+            --secondary-color: #00E676;
+            --dark-color: #111111;
+            --light-color: #f5f5f5;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --success: #28a745;
+            --danger: #dc3545;
+            
+            --body-font: 'Roboto', sans-serif;
+            --heading-font: 'Montserrat', sans-serif;
+            
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
+            
+            --border-radius-sm: 0.25rem;
+            --border-radius: 0.5rem;
+            --border-radius-lg: 1rem;
+            --border-radius-xl: 2rem;
+            --border-radius-full: 9999px;
+            
+            --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+            
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background: var(--light-color);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .thank-you-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thank-you-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .thank-you-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 60px 50px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .brava-logo {
+            margin-bottom: 30px;
+        }
+
+        .brava-logo .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c42);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .brava-logo .logo-icon i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .brava-logo h2 {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--success), #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: bounceIn 0.8s ease-out 0.3s both;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+
+        .thank-you-title {
+            font-family: var(--heading-font);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thank-you-subtitle {
+            font-family: var(--heading-font);
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .thank-you-message {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .order-details {
+            background: linear-gradient(135deg, var(--gray-100), #f8f9fa);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .order-details h3 {
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: var(--heading-font);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-details h3 i {
+            color: var(--primary-color);
+        }
+
+        .order-info {
+            display: grid;
+            gap: 12px;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 1rem;
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            padding-top: 15px;
+            margin-top: 5px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .order-row .label {
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .order-row .value {
+            color: var(--gray-900);
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .back-to-shop {
+            background: linear-gradient(135deg, var(--primary-color), #ff8c42);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.3);
+        }
+
+        .back-to-shop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 87, 34, 0.4);
+        }
+
+        .continue-shopping {
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .continue-shopping:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.3);
+        }
+
+        .social-links {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .social-links h4 {
+            color: var(--gray-700);
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c42);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.4);
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-card {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+            
+            .thank-you-title {
+                font-size: 2.2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .back-to-shop,
+            .continue-shopping {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .thank-you-card {
+                padding: 30px 20px;
+            }
+            
+            .thank-you-title {
+                font-size: 1.8rem;
+            }
+            
+            .brava-logo h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-card">
+            <!-- Brava Logo -->
+            <div class="brava-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h2>Brava</h2>
+            </div>
+            
+            <!-- Success Icon -->
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <!-- Thank You Title -->
+            <h1 class="thank-you-title">Thank You!</h1>
+            <p class="thank-you-subtitle">Your order has been successfully placed</p>
+            
+            <!-- Thank You Message -->
+            <p class="thank-you-message">
+                We're excited to fulfill your order! Our team will contact you within 24 hours to confirm your order details and arrange delivery. Thank you for choosing Brava! 🚀
+            </p>
+            
+            <!-- Order Details -->
+            <div class="order-details" id="orderDetails">
+                <!-- Order details will be populated by JavaScript -->
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="products.html" class="back-to-shop">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Shop
+                </a>
+                <a href="index.html" class="continue-shopping">
+                    <i class="fas fa-home"></i>
+                    Go Home
+                </a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links">
+                <h4>Follow us for updates and new collections</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:brava.wear.official@hotmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get order details from URL parameters
+        function getOrderDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderData = {
+                productName: urlParams.get('product') || 'Product',
+                size: urlParams.get('size') || 'Not selected',
+                color: urlParams.get('color') || 'Not selected',
+                quantity: urlParams.get('quantity') || '1',
+                totalPrice: urlParams.get('total') || '0',
+                customerName: urlParams.get('customer') || 'Customer'
+            };
+            
+            return orderData;
+        }
+        
+        // Display order details
+        function displayOrderDetails() {
+            const orderData = getOrderDetails();
+            const orderDetailsDiv = document.getElementById('orderDetails');
+            
+            orderDetailsDiv.innerHTML = `
+                <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+                <div class="order-info">
+                    <div class="order-row">
+                        <span class="label">Product:</span>
+                        <span class="value">${orderData.productName}</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">Size:</span>
+                        <span class="value">${orderData.size}</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">Color:</span>
+                        <span class="value">${orderData.color}</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">Quantity:</span>
+                        <span class="value">${orderData.quantity}</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">Total Amount:</span>
+                        <span class="value">${orderData.totalPrice} DH</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayOrderDetails();
+            
+            // Add some interactive effects
+            const card = document.querySelector('.thank-you-card');
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .faq-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .faq-category-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius-full);
+            background: transparent;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-category-btn.active,
+        .faq-category-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+        .faq-section h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .faq-question:hover {
+            background: var(--gray-50);
+        }
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+        }
+        .faq-icon {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 1000px;
+        }
+        .faq-answer p {
+            color: var(--gray-700);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .faq-answer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+        .contact-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--gray-50);
+            border-radius: var(--border-radius-lg);
+        }
+        .contact-cta h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .contact-cta p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faqs.html" class="active">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy-policy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Frequently Asked Questions</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">FAQs</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section">
+        <div class="container">
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="general">General</button>
+                <button class="faq-category-btn" data-category="orders">Orders</button>
+                <button class="faq-category-btn" data-category="shipping">Shipping</button>
+                <button class="faq-category-btn" data-category="returns">Returns</button>
+                <button class="faq-category-btn" data-category="products">Products</button>
+            </div>
+
+            <!-- General FAQs -->
+            <div class="faq-section" id="general">
+                <h2>General Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is Brava?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Brava is a premium streetwear brand specializing in high-quality t-shirts with unique designs. We focus on creating bold, expressive clothing that allows individuals to showcase their personal style.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Where are your t-shirts made?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our t-shirts are made using premium materials and are manufactured in facilities that meet our high quality standards. We prioritize ethical manufacturing practices and sustainable materials.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer international shipping?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to most countries worldwide. Shipping rates and delivery times vary by location. You can check shipping options during checkout.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders FAQs -->
+            <div class="faq-section" id="orders" style="display: none;">
+                <h2>Order Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I track my order?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once your order is shipped, you'll receive a confirmation email with tracking information. You can also contact our customer service team with your order number for assistance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I change or cancel my order?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To change or cancel an order, please contact us as soon as possible. Once an order has been shipped, it cannot be canceled, but you can return it according to our return policy.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. All payments are processed securely.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping FAQs -->
+            <div class="faq-section" id="shipping" style="display: none;">
+                <h2>Shipping Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does shipping take?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard shipping typically takes 3-5 business days within the US. International shipping can take 7-14 business days depending on the destination.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer express shipping?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer express shipping options for faster delivery. Express shipping typically takes 1-2 business days within the US.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much does shipping cost?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Shipping costs vary based on your location and the shipping method you choose. Free shipping is available on orders over $50 within the US.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Returns FAQs -->
+            <div class="faq-section" id="returns" style="display: none;">
+                <h2>Returns & Exchanges</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is your return policy?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy on unused items in original packaging. Please visit our <a href="terms.html">Terms and Conditions</a> page for complete details on returns and exchanges.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I return an item?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To return an item, please contact our customer service team with your order number. We'll provide you with a return shipping label and instructions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I exchange for a different size?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can exchange for a different size within 30 days of purchase. Please contact our customer service team to arrange the exchange.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products FAQs -->
+            <div class="faq-section" id="products" style="display: none;">
+                <h2>Product Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What materials are your t-shirts made from?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our t-shirts are made from premium 100% cotton or cotton blends for maximum comfort and durability. We also use sustainable materials when possible.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I care for my t-shirt?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend washing in cold water and tumble drying on low heat. Avoid using bleach or fabric softeners to preserve the design and fabric quality.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Are your designs limited edition?</h3>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Some of our designs are limited edition and may not be restocked. We clearly mark limited edition items on our product pages.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <h3>Still have questions?</h3>
+                <p>Our customer service team is here to help you with any additional questions or concerns.</p>
+                <a href="contact.html" class="btn primary-btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>Brava</h2>
+                    </div>
+                    <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=classic">Classic Tees</a></li>
+                        <li><a href="products.html?category=graphic">Graphic Designs</a></li>
+                        <li><a href="products.html?category=limited">Limited Edition</a></li>
+                        <li><a href="products.html?category=trending">Trending Now</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Category Toggle
+        const categoryBtns = document.querySelectorAll('.faq-category-btn');
+        const faqSections = document.querySelectorAll('.faq-section');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.dataset.category;
+                
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show/hide sections
+                faqSections.forEach(section => {
+                    if (section.id === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // FAQ Item Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

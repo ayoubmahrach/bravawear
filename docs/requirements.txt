@@ -1,0 +1,4 @@
+# No Python dependencies. This is a static HTML/CSS/JS website.
+# External libraries used:
+# - Font Awesome 6.4.0 (CDN)
+# - Google Fonts: Montserrat, Roboto (CDN) 

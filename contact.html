@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html" class="active">Contact</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy-policy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Contact Us</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">Contact Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>Marrakech<br>Morocco</p>
+                    <div class="info-extra">
+                        <strong>Online Store:</strong><br>
+                        Available 24/7<br>
+                        Fast shipping nationwide
+                    </div>
+                </div>
+                <div class="contact-info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>+212702209437</p>
+                    <div class="info-extra">
+                        <strong>Customer Service:</strong><br>
+                        Available for WhatsApp orders<br>
+                        Quick response guaranteed
+                    </div>
+                </div>
+                <div class="contact-info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>brava.wear.official@hotmail.com</p>
+                    <div class="info-extra">
+                        <strong>Response Time:</strong><br>
+                        Within 24 hours<br>
+                        For urgent orders: WhatsApp preferred
+                    </div>
+                </div>
+                <div class="contact-info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our AI assistant</p>
+                    <div class="info-extra">
+                        <strong>Available 24/7</strong><br>
+                        Get instant answers to your questions<br>
+                        <button class="chat-btn" onclick="openChat()">Start Chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-form-container">
+                <div class="section-header">
+                    <h2>Send Us a Message</h2>
+                    <p>Have questions about our t-shirts or need assistance? We'd love to hear from you!</p>
+                </div>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="product">Product Information</option>
+                            <option value="order">Order Status</option>
+                            <option value="returns">Returns & Exchanges</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help you..." required></textarea>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">Subscribe to our newsletter for updates and exclusive offers</label>
+                        </div>
+                        <div class="form-actions">
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="contact-faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions</p>
+            </div>
+            <div class="faq-cta">
+                <p>Can't find what you're looking for? Our customer service team is here to help!</p>
+                <a href="faqs.html" class="btn outline-btn">View All FAQs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>Brava</h2>
+                    </div>
+                    <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=classic">Classic Tees</a></li>
+                        <li><a href="products.html?category=graphic">Graphic Designs</a></li>
+                        <li><a href="products.html?category=limited">Limited Edition</a></li>
+                        <li><a href="products.html?category=trending">Trending Now</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget" class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <span>Brava AI Assistant</span>
+            </div>
+            <button class="chat-close" onclick="closeChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>👋 Hi! I'm Brava's AI assistant. How can I help you today?</p>
+                    <p>You can ask me about:</p>
+                    <ul>
+                        <li>• Our t-shirt collections</li>
+                        <li>• Sizing and fit</li>
+                        <li>• Ordering process</li>
+                        <li>• Shipping information</li>
+                        <li>• Returns and exchanges</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-field" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat Toggle Button -->
+    <div id="chat-toggle" class="chat-toggle" onclick="openChat()">
+        <i class="fas fa-comments"></i>
+        <span>Chat with us</span>
+    </div>
+
+    <style>
+        /* Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .bot-message {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .user-message .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .bot-message .message-content {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .bot-message .message-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .bot-message .message-content li {
+            margin-bottom: 5px;
+        }
+
+        .chat-input {
+            padding: 15px 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chat-input button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-input button:hover {
+            background: #e64a19;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+            z-index: 999;
+            transition: transform 0.3s;
+        }
+
+        .chat-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        .chat-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .chat-btn:hover {
+            background: #e64a19;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-widget {
+                width: calc(100vw - 40px);
+                height: calc(100vh - 100px);
+                bottom: 10px;
+                right: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        // AI Chat Functionality
+        const chatResponses = {
+            // Greetings
+            'hello': 'Hello! How can I help you with our t-shirt collection today?',
+            'hi': 'Hi there! Welcome to Brava. What can I assist you with?',
+            'hey': 'Hey! Thanks for reaching out. How can I help you?',
+            
+            // Product Questions
+            'products': 'We have several amazing collections: Classic Tees, Big Designs, Custom Designs, Streetwear, Limited Edition, On Sale, and Anime T-Shirts. Which one interests you?',
+            'collections': 'Our collections include: Classic Tees, Big Designs, Custom Designs, Streetwear, Limited Edition, On Sale, and Anime T-Shirts. What would you like to know about?',
+            'tshirts': 'We offer high-quality t-shirts in various styles: Classic, Graphic Designs, Streetwear, Limited Edition, and more. What type are you looking for?',
+            
+            // Sizing
+            'size': 'We offer sizes from XS to XXL. Our t-shirts are true to size and made from premium cotton for comfort. Would you like sizing recommendations?',
+            'sizing': 'Our sizing guide: XS (34-36), S (36-38), M (38-40), L (40-42), XL (42-44), XXL (44-46). All measurements in inches. Need help choosing?',
+            'fit': 'Our t-shirts are designed for a comfortable, true-to-size fit. They\'re made from premium cotton that\'s soft and breathable. What size do you usually wear?',
+            
+            // Ordering
+            'order': 'To place an order: 1) Browse our products, 2) Click "See Details" on any t-shirt, 3) Choose size and quantity, 4) Fill out the order form, 5) Submit via WhatsApp. Easy!',
+            'buy': 'You can order directly through our website! Just click "See Details" on any product, then "Order Now" to fill out the form. We\'ll process your order via WhatsApp.',
+            'purchase': 'Ordering is simple: Select your product, choose size/quantity, fill the order form, and we\'ll contact you via WhatsApp to complete the purchase.',
+            
+            // Shipping
+            'shipping': 'We offer worldwide shipping! Standard delivery takes 5-7 business days, express shipping 2-3 days. Shipping cost is $5.99. Where are you located?',
+            'delivery': 'Shipping costs $5.99 and takes 5-7 business days for standard delivery. Express shipping (2-3 days) is available for an additional fee.',
+            'shipping cost': 'Shipping is $5.99 for all orders. Express shipping available for faster delivery at additional cost.',
+            
+            // Returns
+            'return': 'We accept returns within 30 days of purchase. Items must be unworn and in original condition. Contact us via WhatsApp for return instructions.',
+            'exchange': 'Exchanges are available within 30 days. Just contact us via WhatsApp and we\'ll help you exchange for a different size or style.',
+            'refund': 'Refunds are processed within 5-7 business days after we receive your return. Contact us via WhatsApp to initiate a return.',
+            
+            // Payment
+            'payment': 'We accept payments via WhatsApp. After you submit your order form, we\'ll contact you to arrange payment and shipping details.',
+            'pay': 'Payment is handled through WhatsApp after you submit your order. We\'ll contact you to arrange payment and shipping.',
+            'price': 'Our t-shirts range from $27.99 to $54.99, with special sale items starting at $19.99. Check our products page for current prices!',
+            
+            // Contact
+            'contact': 'You can reach us via WhatsApp at +212702209437, email at brava.wear.official@hotmail.com, or through this chat! We\'re here to help.',
+            'help': 'I\'m here to help! You can ask me about our products, sizing, ordering, shipping, returns, or anything else about Brava.',
+            
+            // Default
+            'default': 'Thanks for your message! I\'m here to help with any questions about our t-shirts, ordering process, sizing, shipping, or returns. What would you like to know?'
+        };
+
+        let chatOpen = false;
+
+        function openChat() {
+            document.getElementById('chat-widget').style.display = 'flex';
+            document.getElementById('chat-toggle').style.display = 'none';
+            chatOpen = true;
+            document.getElementById('chat-input-field').focus();
+        }
+
+        function closeChat() {
+            document.getElementById('chat-widget').style.display = 'none';
+            document.getElementById('chat-toggle').style.display = 'flex';
+            chatOpen = false;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input-field');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                // Simulate AI response delay
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const response = getAIResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${text}</p>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message';
+            typingDiv.id = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check for exact matches first
+            for (const [key, response] of Object.entries(chatResponses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Check for common variations
+            if (lowerMessage.includes('how') && lowerMessage.includes('order')) {
+                return chatResponses['order'];
+            }
+            
+            if (lowerMessage.includes('what') && lowerMessage.includes('size')) {
+                return chatResponses['size'];
+            }
+            
+            if (lowerMessage.includes('shipping') || lowerMessage.includes('delivery')) {
+                return chatResponses['shipping'];
+            }
+            
+            if (lowerMessage.includes('return') || lowerMessage.includes('refund')) {
+                return chatResponses['return'];
+            }
+            
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return chatResponses['price'];
+            }
+            
+            if (lowerMessage.includes('contact') || lowerMessage.includes('help')) {
+                return chatResponses['contact'];
+            }
+            
+            // Default response
+            return chatResponses['default'];
+        }
+    </script>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

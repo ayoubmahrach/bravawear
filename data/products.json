@@ -1,0 +1,98 @@
+[
+  {
+    "name": "White T-Shirt",
+    "price": "120 MAD",
+    "image": "img/product-placeholder.jpg",
+    "category": "classic"
+  },
+  {
+    "name": "Black T-Shirt",
+    "price": "130 MAD",
+    "image": "img/product-placeholder.jpg",
+    "category": "classic"
+  },
+  {
+    "name": "Brava Classic White Tee",
+    "price": "29.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "classic"
+  },
+  {
+    "name": "Urban Streetwear Black Tee",
+    "price": "34.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "graphic"
+  },
+  {
+    "name": "Brava Neon Green Tee",
+    "price": "39.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "streetwear"
+  },
+  {
+    "name": "Vintage Retro Tee",
+    "price": "44.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "vintage"
+  },
+  {
+    "name": "Minimalist Gray Tee",
+    "price": "27.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "minimalist"
+  },
+  {
+    "name": "Limited Edition Artist Tee",
+    "price": "49.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "limited"
+  },
+  {
+    "name": "Graphic Design Tee",
+    "price": "35.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "graphic"
+  },
+  {
+    "name": "Streetwear Collection Tee",
+    "price": "42.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "streetwear"
+  },
+  {
+    "name": "Premium Cotton Tee",
+    "price": "31.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "classic"
+  },
+  {
+    "name": "Trending Fashion Tee",
+    "price": "38.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "trending"
+  },
+  {
+    "name": "Hip Hop Style Tee",
+    "price": "36.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "streetwear"
+  },
+  {
+    "name": "Abstract Art Tee",
+    "price": "41.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "graphic"
+  },
+  {
+    "name": "Summer Collection Tee",
+    "price": "33.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "trending"
+  },
+  {
+    "name": "Exclusive Designer Tee",
+    "price": "54.99 USD",
+    "image": "img/product-placeholder.jpg",
+    "category": "limited"
+  }
+] 

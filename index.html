@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brava - Your Ultimate Streetwear T-Shirt Store</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Special Offer Card Styles */
+        .special-offer-card {
+            border: 2px solid #ff6b35;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .special-offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ff8c42, #ff6b35);
+            z-index: 2;
+        }
+        
+        .special-offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.25);
+        }
+        
+        .special-offer-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 3;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .offer-text {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .offer-subtext {
+            font-size: 0.6rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        .offer-highlight {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .feature-tag.special {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            border: none;
+        }
+        
+        .bundle-offer {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .bundle-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .special-btn {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .special-btn:hover {
+            background: linear-gradient(135deg, #e55a2b, #ff7a3a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .special-offer-card .product-price {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .special-offer-card .product-price {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff6b35;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        .special-offer-card .current-price {
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+        
+        .special-offer-card .current-price .price-value {
+            color: #ff6b35;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+        
+        .special-offer-card .current-price .price-period {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+        
+        .special-offer-card .original-price-container {
+            margin-top: 2px;
+        }
+        
+        .special-offer-card .original-price {
+            color: #999;
+            font-weight: 500;
+            text-decoration: line-through;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy-policy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Express Your</h2>
+                <h1 class="hero-title">STYLE</h1>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search your t-shirt">
+                    <button class="search-button" onclick="window.location.href='products.html?search=' + document.querySelector('.search-bar input').value">
+                        <i class="fas fa-search"></i> SEARCH
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>Scroll down</span>
+            <span>to explore</span>
+            <div class="scroll-arrow">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Highlights -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Explore Categories</h2>
+                <p>Find the perfect t-shirt for your style</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Classic Tees</h3>
+                    <a href="products.html?category=classic" class="category-link">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Graphic Designs</h3>
+                    <a href="products.html?category=graphic" class="category-link">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Limited Edition</h3>
+                    <a href="products.html?category=limited" class="category-link">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Trending Now</h3>
+                    <a href="products.html?category=trending" class="category-link">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Design Your Own</h3>
+                    <a href="products.html?category=design-your-own" class="category-link">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="featured-header">
+                <h2>Explore Our T-Shirt Collection</h2>
+                <div class="slider-controls">
+                    <div class="slider-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product-grid">
+                <div class="product-card special-offer-card">
+                    <div class="product-image">
+                        <img src="assets/images/products/t-shirts-special.png" alt="Special Offer - Anime Collection Tee">
+                        <div class="product-price">
+                            <div class="current-price">
+                                <span class="price-value">99</span><span class="price-period"> DH</span>
+                            </div>
+                            <div class="original-price-container">
+                                <span class="original-price">199 DH</span>
+                            </div>
+                        </div>
+                        <div class="special-offer-overlay">
+                            <div class="offer-text">SPECIAL OFFER</div>
+                            <div class="offer-subtext">199+ DESIGNS</div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="offer-highlight">
+                            <i class="fas fa-fire"></i>
+                            <span>LIMITED TIME OFFER</span>
+                        </div>
+                        <h3 class="product-title">Anime Collection Tee</h3>
+                        <p class="product-description">🔥 Choose from 199+ amazing anime designs! Get 1 for 99 DH or 2 for only 160 DH! Perfect for anime fans and collectors.</p>
+                        <div class="product-features">
+                            <div class="feature-tag special">
+                                <i class="fas fa-fire"></i> Special Offer
+                            </div>
+                            <div class="feature-tag special">
+                                <i class="fas fa-palette"></i> 199+ Designs
+                            </div>
+                            <div class="feature-tag special">
+                                <i class="fas fa-star"></i> 50% Off
+                            </div>
+                        </div>
+                        <div class="bundle-offer">
+                            <div class="bundle-text">
+                                <i class="fas fa-gift"></i>
+                                <span>2 for 160 DH</span>
+                            </div>
+                        </div>
+                        <div class="additional-info">
+                            <div class="info-tag">
+                                <i class="fas fa-star"></i> 5.0/5
+                            </div>
+                            <div class="info-tag">
+                                <i class="fas fa-clock"></i> Limited Time
+                            </div>
+                        </div>
+                        <a href="products.html?category=on-sale" class="btn special-btn">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/images/products/58.png" alt="Tufan Al-Aqsa Palestine Tee">
+                        <div class="product-price">
+                            <span class="price-value">129</span><span class="price-period"> DH</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tufan Al-Aqsa Palestine Tee</h3>
+                        <p class="product-description">Stand in solidarity with Palestine with this powerful t-shirt featuring bold Arabic calligraphy and symbolic imagery representing Palestinian resistance and hope.</p>
+                        <div class="product-features">
+                            <div class="feature-tag">
+                                <i class="fas fa-heart"></i> Solidarity
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-palette"></i> Cultural Design
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-star"></i> Meaningful
+                            </div>
+                        </div>
+                        <div class="additional-info">
+                            <div class="info-tag">
+                                <i class="fas fa-star"></i> 5.0/5
+                            </div>
+                            <div class="info-tag">
+                                <i class="fas fa-check-circle"></i> In Stock
+                            </div>
+                        </div>
+                        <a href="products.html?category=streetwear" class="btn">See More Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/images/products/your-design.png" alt="Design Your Own Tee">
+                        <div class="product-price">
+                            <span class="price-value">Starting from 99</span><span class="price-period"> DH</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Design Your Own Tee</h3>
+                        <p class="product-description">Create your unique masterpiece with our custom design service! Bring your vision to life on a premium cotton t-shirt. Perfect for personal expression, custom gifts, or brand merchandise.</p>
+                        <div class="product-features">
+                            <div class="feature-tag">
+                                <i class="fas fa-palette"></i> Custom Design
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-heart"></i> Personalized
+                            </div>
+                            <div class="feature-tag">
+                                <i class="fas fa-medal"></i> Premium Quality
+                            </div>
+                        </div>
+                        <div class="additional-info">
+                            <div class="info-tag">
+                                <i class="fas fa-star"></i> 5.0/5
+                            </div>
+                            <div class="info-tag">
+                                <i class="fas fa-check-circle"></i> Custom Service
+                            </div>
+                        </div>
+                        <a href="products.html?category=design-your-own" class="btn">Start Designing <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all">
+                <a href="products.html" class="btn outline-btn">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="promotions">
+        <div class="container">
+            <div class="promo-banner">
+                <div class="promo-content">
+                    <h2>Summer Collection</h2>
+                    <p>Get up to 40% off on selected t-shirts</p>
+                    <a href="products.html?category=sale" class="btn primary-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Preview -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-content">
+                <div class="section-header">
+                    <h2>About Brava</h2>
+                </div>
+                <p>We're passionate about streetwear and committed to providing high-quality t-shirts with unique designs for fashion enthusiasts. Our curated collection combines comfort, style, and bold expression to help you showcase your individuality.</p>
+                <a href="about.html" class="btn text-btn">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="customer-reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"The quality of the t-shirts exceeded my expectations. Perfect fit and amazing designs for my streetwear collection!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-image" style="display: flex; align-items: center; justify-content: center; background: #e0e0e0; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; color: #888;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Sarah Abouzahid</h4>
+                            <p>Fashion Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="review-text">"Fast shipping and the t-shirts are authentic and high quality. Will definitely buy from Brava again!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-image" style="display: flex; align-items: center; justify-content: center; background: #e0e0e0; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; color: #888;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Mohamed Chorfi</h4>
+                            <p>Streetwear Fan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to get exclusive offers, new product alerts, and style tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h2>Brava</h2>
+                    </div>
+                    <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=classic">Classic Tees</a></li>
+                        <li><a href="products.html?category=graphic">Graphic Designs</a></li>
+                        <li><a href="products.html?category=limited">Limited Edition</a></li>
+                        <li><a href="products.html?category=trending">Trending Now</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

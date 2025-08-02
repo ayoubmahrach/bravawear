@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Brava</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .terms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 16px;
+            display: flex;
+            gap: 40px;
+        }
+        .terms-sidebar {
+            flex: 0 0 260px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 30px 20px;
+            position: sticky;
+            top: 110px;
+            align-self: flex-start;
+            height: fit-content;
+        }
+        .terms-sidebar h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .terms-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .terms-nav li {
+            margin-bottom: 12px;
+        }
+        .terms-nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: block;
+            transition: background 0.2s, color 0.2s;
+        }
+        .terms-nav a.active, .terms-nav a:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .terms-main {
+            flex: 1;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 40px 32px;
+        }
+        .terms-main h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        .terms-section {
+            margin-bottom: 48px;
+        }
+        .terms-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+        .terms-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            margin-top: 24px;
+        }
+        .terms-section p, .terms-section ul, .terms-section ol {
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .terms-section ul, .terms-section ol {
+            padding-left: 24px;
+        }
+        .terms-section ul li, .terms-section ol li {
+            margin-bottom: 8px;
+        }
+        @media (max-width: 992px) {
+            .terms-container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .terms-sidebar {
+                position: static;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .terms-main {
+                padding: 24px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">
+                            <i class="fas fa-tshirt"></i>
+                            <h1>Brava</h1>
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="size-guide.html">Size Guide</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="terms.html" class="active">Terms</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="container">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-tshirt"></i>
+                        <h1>Brava</h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy-policy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Terms & Conditions</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active">Terms</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <div class="terms-container">
+        <aside class="terms-sidebar">
+            <h2>On this page</h2>
+            <ul class="terms-nav">
+                <li><a href="#general" class="active">General Terms</a></li>
+                <li><a href="#ordering">Ordering & Payment</a></li>
+                <li><a href="#delivery">Delivery</a></li>
+                <li><a href="#returns">Returns & Exchanges</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </aside>
+        <main class="terms-main">
+            <h1>Terms & Conditions</h1>
+            <section class="terms-section" id="general">
+                <h2>General Terms</h2>
+                <p>Welcome to Brava Streetwear. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully before using our services.</p>
+                <ul>
+                    <li>These terms apply to all visitors, users, and others who access or use the service.</li>
+                    <li>We reserve the right to update or change these terms at any time.</li>
+                    <li>All transactions are conducted in Moroccan Dirham (DH).</li>
+                    <li>Our business operates under Moroccan law and regulations.</li>
+                </ul>
+            </section>
+            <section class="terms-section" id="ordering">
+                <h2>Ordering & Payment</h2>
+                <h3>Order Process</h3>
+                <p>When you place an order, you are making an offer to purchase products under these terms. We reserve the right to accept or decline your order for any reason.</p>
+                <h3>Payment Methods</h3>
+                <ul>
+                    <li>Cash on delivery (COD) - Available throughout Morocco</li>
+                    <li>Bank transfer (for advance payment)</li>
+                    <li>Mobile money transfers</li>
+                </ul>
+                <p>For most orders, payment is made upon delivery. We accept cash payment in Moroccan Dirham (DH) when your products are delivered.</p>
+                <h3>Order Confirmation</h3>
+                <p>After placing your order, you will receive a confirmation via WhatsApp or phone call within 24 hours. We will confirm your order details and delivery address.</p>
+            </section>
+            <section class="terms-section" id="delivery">
+                <h2>Delivery</h2>
+                <h3>Delivery Time</h3>
+                <ul>
+                    <li><strong>Standard delivery: 3 days</strong> throughout Morocco</li>
+                    <li>Delivery is available to all major cities and towns in Morocco</li>
+                    <li>Rural areas may take an additional 1-2 days</li>
+                </ul>
+                <h3>Delivery Process</h3>
+                <ul>
+                    <li>Orders are processed within 24 hours of confirmation</li>
+                    <li>You will receive a WhatsApp message or phone call when your order is ready for delivery</li>
+                    <li>Delivery is made by our trusted courier partners</li>
+                    <li>Please ensure someone is available to receive the delivery</li>
+                </ul>
+                <h3>Delivery Charges</h3>
+                <ul>
+                    <li>Standard delivery fee: 15 DH per order</li>
+                    <li>Free delivery for orders over 200 DH</li>
+                    <li>Additional charges may apply for remote areas</li>
+                </ul>
+                <p><strong>Note:</strong> Delivery times may be extended during holidays, weekends, or peak seasons.</p>
+            </section>
+            <section class="terms-section" id="returns">
+                <h2>Returns & Exchanges</h2>
+                <h3>Return Policy</h3>
+                <ul>
+                    <li><strong>24-hour return window:</strong> Returns must be requested within 24 hours of receiving your order</li>
+                    <li>Items must be unused, in original packaging, with all tags attached</li>
+                    <li>Items must be clean and in the same condition as received</li>
+                    <li>Custom design orders are non-returnable unless there is a manufacturing defect</li>
+                </ul>
+                <h3>Return Conditions</h3>
+                <ul>
+                    <li><strong>Customer pays shipping:</strong> Return shipping costs are the responsibility of the customer</li>
+                    <li>Return shipping fee: 15 DH (same as delivery fee)</li>
+                    <li>Returns must be properly packaged to prevent damage during transit</li>
+                    <li>We reserve the right to refuse returns that do not meet our conditions</li>
+                </ul>
+                <h3>How to Return</h3>
+                <ol>
+                    <li>Contact us via WhatsApp (+212702209437) within 24 hours of receiving your order</li>
+                    <li>Provide your order number and reason for return</li>
+                    <li>We will provide you with return instructions and shipping address</li>
+                    <li>Pack the item securely in its original packaging</li>
+                    <li>Ship the item to the address provided by our team</li>
+                    <li>Include your order number and contact information</li>
+                </ol>
+                <h3>Refunds</h3>
+                <ul>
+                    <li>Refunds are processed within 3-5 business days after we receive the returned item</li>
+                    <li>Refund amount excludes the original delivery fee (15 DH)</li>
+                    <li>Return shipping costs are not refunded</li>
+                    <li>Refunds are issued via bank transfer or cash pickup</li>
+                </ul>
+                <h3>Exchanges</h3>
+                <ul>
+                    <li>Size exchanges are available within 24 hours of delivery</li>
+                    <li>Customer pays shipping costs for exchanges</li>
+                    <li>Exchanges are subject to stock availability</li>
+                </ul>
+            </section>
+            <section class="terms-section" id="privacy">
+                <h2>Privacy Policy</h2>
+                <p>We respect your privacy and are committed to protecting your personal information. We collect only what is necessary to process your orders and improve our services. We do not sell or share your information with third parties except as required to fulfill your order or by law.</p>
+            </section>
+            <section class="terms-section" id="contact">
+                <h2>Contact</h2>
+                <p>If you have any questions about these terms, please contact us:</p>
+                <ul>
+                    <li><i class="fab fa-whatsapp"></i> WhatsApp: +212702209437</li>
+                    <li><i class="fas fa-envelope"></i> Email: brava.wear.official@hotmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Location: Marrakech, Morocco</li>
+                    <li><i class="fas fa-clock"></i> Business Hours: Monday - Saturday, 9:00 AM - 8:00 PM (GMT+1)</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to get exclusive offers, new product alerts, and training tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                                    <div class="footer-logo">
+                    <h2>Brava</h2>
+                </div>
+                <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=anime">Anime</a></li>
+                        <li><a href="products.html?category=design-your-own">Design Your Own</a></li>
+                        <li><a href="products.html?category=streetwear">Streetwear</a></li>
+                        <li><a href="products.html?category=top-sellers">Top Sellers</a></li>
+                        <li><a href="products.html?category=on-sale">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="terms.html">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Marrakech</li>
+                        <li><i class="fas fa-phone"></i> +212702209437</li>
+                        <li><i class="fas fa-envelope"></i> brava.wear.official@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brava. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 
