@@ -1203,10 +1203,10 @@
                     </div>
                     <p>Your ultimate destination for premium streetwear t-shirts and bold fashion expression.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/share/1G6Arhm9kP/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brava_3alami/?igsh=MXMyYnRtaXdtYTg4eg%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@brava.wear?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/212702209437" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -1523,6 +1523,16 @@
             initializeFilters();
             initializeSort();
             initializeMobileMenu();
+            
+            // Check if modal should be opened from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const modalProductId = urlParams.get('modal');
+            if (modalProductId) {
+                // Small delay to ensure page is fully loaded
+                setTimeout(() => {
+                    openModalForProduct(modalProductId);
+                }, 500);
+            }
         });
 
         // Display products
@@ -2025,26 +2035,34 @@
 
         // Confirm order function
         async function confirmOrder() {
-            // Validate required fields
-            const fullName = document.getElementById('fullName').value.trim();
-            const streetAddress = document.getElementById('streetAddress').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const country = document.getElementById('country').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const notes = document.getElementById('notes').value.trim();
+            try {
+                // Validate required fields
+                const fullName = document.getElementById('fullName')?.value?.trim() || '';
+                const streetAddress = document.getElementById('streetAddress')?.value?.trim() || '';
+                const city = document.getElementById('city')?.value?.trim() || '';
+                const country = document.getElementById('country')?.value?.trim() || '';
+                const phone = document.getElementById('phone')?.value?.trim() || '';
+                const notes = document.getElementById('notes')?.value?.trim() || '';
 
-            if (!fullName || !streetAddress || !city || !country || !phone) {
-                alert('Please fill in all required fields');
-                return;
-            }
+                if (!fullName || !streetAddress || !city || !country || !phone) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
 
-            if (!currentProduct) {
-                alert('No product selected');
-                return;
-            }
+                if (!currentProduct) {
+                    alert('No product selected');
+                    return;
+                }
 
-            if (!selectedSize) {
-                alert('Please select a size');
+                if (!selectedSize) {
+                    alert('Please select a size');
+                    return;
+                }
+
+            // Check if this is a custom design order (Design Your Own Tee - ID: 19)
+            if (currentProduct.id === 19) {
+                // Handle custom design order - redirect to WhatsApp
+                handleCustomDesignOrder(fullName, streetAddress, city, country, phone, notes);
                 return;
             }
 
@@ -2060,23 +2078,23 @@
             const orderMessage = `🛍️ <b>NEW ORDER - Brava Streetwear</b>
 
 <b>Product Details:</b>
-• Product: ${currentProduct.name}
-• Price: ${currentProduct.currency} ${productPrice}
-• Size: ${selectedSize}
-• Color: ${selectedColor}
-• Quantity: ${selectedQuantity}
-• Subtotal: ${currentProduct.currency} ${totalProductPrice}
+• Product: <code>${currentProduct.name}</code>
+• Price: <code>${currentProduct.currency} ${productPrice}</code>
+• Size: <code>${selectedSize}</code>
+• Color: <code>${selectedColor}</code>
+• Quantity: <code>${selectedQuantity}</code>
+• Subtotal: <code>${currentProduct.currency} ${totalProductPrice}</code>
 
 <b>Customer Information:</b>
-• Name: ${fullName}
-• Address: ${streetAddress}, ${city}, ${country}
-• Phone: ${phone}
-${notes ? `• Notes: ${notes}` : ''}
+• Name: <code>${fullName}</code>
+• Address: <code>${streetAddress}, ${city}, ${country}</code>
+• Phone: <code>${phone}</code>
+${notes ? `• Notes: <code>${notes}</code>` : ''}
 
 <b>Order Summary:</b>
-• Product Subtotal: ${currentProduct.currency} ${totalProductPrice}
-• Shipping Cost: ${currentProduct.currency} ${SHIPPING_COST}
-• <b>Total: ${currentProduct.currency} ${totalPrice}</b>
+• Product Subtotal: <code>${currentProduct.currency} ${totalProductPrice}</code>
+• Shipping Cost: <code>${currentProduct.currency} ${SHIPPING_COST}</code>
+• <b>Total: <code>${currentProduct.currency} ${totalPrice}</code></b>
 
 Please process this order. Thank you! 🚀`;
 
@@ -2108,6 +2126,63 @@ Please process this order. Thank you! 🚀`;
                 
                 window.location.href = `thank-you.html?${params.toString()}`;
             }, 2000);
+        } catch (error) {
+            console.error('Error confirming order:', error);
+            hideLoading();
+            alert('An error occurred while processing your order. Please try again or contact us directly.');
+        }
+        }
+
+        // Handle custom design orders - redirect to WhatsApp
+        function handleCustomDesignOrder(fullName, streetAddress, city, country, phone, notes) {
+            // Show loading spinner
+            showLoading();
+
+            // Create custom design order message for WhatsApp
+            const customDesignMessage = `🎨 *CUSTOM DESIGN ORDER - Brava Streetwear*
+
+*Product Details:*
+• Product: Design Your Own Tee
+• Starting Price: 99 DH
+• Size: ${selectedSize}
+• Color: ${selectedColor}
+• Quantity: ${selectedQuantity}
+
+*Customer Information:*
+• Name: ${fullName}
+• Address: ${streetAddress}, ${city}, ${country}
+• Phone: ${phone}
+${notes ? `• Design Notes: ${notes}` : ''}
+
+*Order Type:* Custom Design Service
+*Service:* Customer wants to create a custom t-shirt design
+
+Please contact the customer to discuss their design requirements and provide a quote based on complexity. Thank you! 🚀`;
+
+            // Wait 1 second to show processing
+            setTimeout(() => {
+                hideLoading();
+                
+                // Redirect to WhatsApp with custom design order details
+                const phoneNumber = '+212702209437';
+                const encodedMessage = encodeURIComponent(customDesignMessage);
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+                
+                // Also redirect to thank you page
+                const params = new URLSearchParams({
+                    product: 'Design Your Own Tee',
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity: selectedQuantity,
+                    total: 'Custom Quote',
+                    customer: fullName,
+                    type: 'custom-design'
+                });
+                
+                window.location.href = `thank-you.html?${params.toString()}`;
+            }, 1000);
         }
 
         function showImage(type) {
@@ -2164,75 +2239,84 @@ Please process this order. Thank you! 🚀`;
         function openModalForProduct(productId) {
             console.log('openModalForProduct called with:', productId);
             
-            // Find the product
-            const product = products.find(p => p.id === parseInt(productId));
-            if (!product) {
-                console.error('Product not found:', productId);
-                return;
-            }
-            
-            // Set current product
-            currentProduct = product;
-            
-            // Update modal content
-            const modal = document.getElementById('productModal');
-            const title = document.getElementById('modalTitle');
-            const image = document.getElementById('modalImage');
-            const description = document.getElementById('modalDescription');
-            const price = document.getElementById('modalPrice');
-            
-            if (title) title.textContent = product.name;
-            if (image) {
+            try {
+                // Find the product
+                const product = products.find(p => p.id === parseInt(productId));
+                if (!product) {
+                    console.error('Product not found:', productId);
+                    alert('Product not found. Please try again.');
+                    return;
+                }
+                
+                // Set current product
+                currentProduct = product;
+                
+                // Update modal content
+                const modal = document.getElementById('productModal');
+                const title = document.getElementById('modalTitle');
+                const image = document.getElementById('modalImage');
+                const description = document.getElementById('modalDescription');
+                const price = document.getElementById('modalPrice');
+                
+                if (!modal || !title || !image || !description || !price) {
+                    console.error('Modal elements not found');
+                    alert('Error loading product details. Please try again.');
+                    return;
+                }
+                
+                title.textContent = product.name;
                 image.src = product.image;
                 image.alt = product.name;
-            }
-            if (description) description.textContent = product.description;
-            if (price) {
+                description.textContent = product.description;
+                
                 if (product.displayPrice) {
                     price.textContent = `${product.displayPrice} ${product.currency}`;
                 } else {
                     price.textContent = `${product.currency} ${product.price}`;
                 }
-            }
-            
-            // Handle images and thumbnails
-            setupProductImages(product);
-            
-            // Reset form
-            const formElements = ['sizeSelect', 'quantityInput', 'fullName', 'streetAddress', 'city', 'phone', 'notes'];
-            formElements.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    if (id === 'quantityInput') {
-                        element.value = '1';
-                    } else if (id === 'country') {
-                        element.value = 'Morocco';
-                    } else {
-                        element.value = '';
+                
+                // Handle images and thumbnails
+                setupProductImages(product);
+                
+                // Reset form
+                const formElements = ['sizeSelect', 'quantityInput', 'fullName', 'streetAddress', 'city', 'phone', 'notes'];
+                formElements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        if (id === 'quantityInput') {
+                            element.value = '1';
+                        } else if (id === 'country') {
+                            element.value = 'Morocco';
+                        } else {
+                            element.value = '';
+                        }
                     }
-                }
-            });
-            
-            // Reset color swatches
-            document.querySelectorAll('.color-swatch').forEach(swatch => {
-                swatch.classList.remove('active');
-            });
-            const blackSwatch = document.querySelector('.color-swatch[data-color="Black"]');
-            if (blackSwatch) blackSwatch.classList.add('active');
-            
-            // Reset variables
-            selectedSize = '';
-            selectedColor = 'Black';
-            selectedQuantity = 1;
-            
-            // Update price display
-            updatePriceDisplay();
-            
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            console.log('Modal opened for:', product.name);
+                });
+                
+                // Reset color swatches
+                document.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.classList.remove('active');
+                });
+                const blackSwatch = document.querySelector('.color-swatch[data-color="Black"]');
+                if (blackSwatch) blackSwatch.classList.add('active');
+                
+                // Reset variables
+                selectedSize = '';
+                selectedColor = 'Black';
+                selectedQuantity = 1;
+                
+                // Update price display
+                updatePriceDisplay();
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                console.log('Modal opened for:', product.name);
+            } catch (error) {
+                console.error('Error opening modal:', error);
+                alert('An error occurred while loading the product. Please try again.');
+            }
         }
         
         // Function to setup product images and thumbnails
@@ -2354,6 +2438,75 @@ Please process this order. Thank you! 🚀`;
         // Make test function globally available
         window.testModal = testModal;
         </script>
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: none;
+    ">
+        <div class="cart-icon" style="
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 87, 34, 0.3);
+            transition: all 0.3s ease;
+        " onclick="showCartModal()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" style="
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: #e74c3c;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                font-weight: bold;
+            ">0</span>
+        </div>
+    </div>
+
     <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Show floating cart when items are in cart
+        function updateFloatingCart() {
+            const cart = JSON.parse(localStorage.getItem('sp_cart') || '[]');
+            const floatingCart = document.querySelector('.floating-cart');
+            const cartCount = document.querySelector('.floating-cart .cart-count');
+            
+            if (cart.length > 0) {
+                floatingCart.style.display = 'block';
+                cartCount.textContent = cart.reduce((sum, item) => sum + Number(item.qty), 0);
+            } else {
+                floatingCart.style.display = 'none';
+            }
+        }
+        
+        // Update floating cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFloatingCart();
+        });
+        
+        // Update floating cart when cart changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'sp_cart') {
+                updateFloatingCart();
+            }
+        });
+    </script>
 </body>
 </html> 

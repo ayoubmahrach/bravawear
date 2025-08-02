@@ -383,6 +383,31 @@
             }
         }
 
+        .custom-design-note {
+            background: #f8f9fa;
+            border-left: 4px solid #ff6b35;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .custom-design-note p {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .custom-design-note ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .custom-design-note li {
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 480px) {
             .thank-you-card {
                 padding: 30px 20px;
@@ -464,7 +489,8 @@
                 color: urlParams.get('color') || 'Not selected',
                 quantity: urlParams.get('quantity') || '1',
                 totalPrice: urlParams.get('total') || '0',
-                customerName: urlParams.get('customer') || 'Customer'
+                customerName: urlParams.get('customer') || 'Customer',
+                orderType: urlParams.get('type') || 'regular'
             };
             
             return orderData;
@@ -475,31 +501,77 @@
             const orderData = getOrderDetails();
             const orderDetailsDiv = document.getElementById('orderDetails');
             
-            orderDetailsDiv.innerHTML = `
-                <h3><i class="fas fa-receipt"></i> Order Summary</h3>
-                <div class="order-info">
-                    <div class="order-row">
-                        <span class="label">Product:</span>
-                        <span class="value">${orderData.productName}</span>
+            // Check if this is a custom design order
+            if (orderData.orderType === 'custom-design') {
+                // Update the thank you message for custom design orders
+                const thankYouMessage = document.querySelector('.thank-you-message');
+                thankYouMessage.innerHTML = `
+                    🎨 <strong>Custom Design Order Received!</strong><br><br>
+                    Thank you for choosing our custom design service! Our design team has been notified and will contact you via WhatsApp within 24 hours to discuss your design requirements and provide a personalized quote. We're excited to bring your vision to life! 🚀
+                `;
+                
+                orderDetailsDiv.innerHTML = `
+                    <h3><i class="fas fa-palette"></i> Custom Design Order</h3>
+                    <div class="order-info">
+                        <div class="order-row">
+                            <span class="label">Service:</span>
+                            <span class="value">Custom Design</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Size:</span>
+                            <span class="value">${orderData.size}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Color:</span>
+                            <span class="value">${orderData.color}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Quantity:</span>
+                            <span class="value">${orderData.quantity}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Price:</span>
+                            <span class="value">${orderData.totalPrice}</span>
+                        </div>
                     </div>
-                    <div class="order-row">
-                        <span class="label">Size:</span>
-                        <span class="value">${orderData.size}</span>
+                    <div class="custom-design-note">
+                        <p><i class="fas fa-info-circle"></i> <strong>Next Steps:</strong></p>
+                        <ul>
+                            <li>Our team will contact you via WhatsApp</li>
+                            <li>We'll discuss your design requirements</li>
+                            <li>You'll receive a personalized quote</li>
+                            <li>Once approved, we'll create your custom design</li>
+                        </ul>
                     </div>
-                    <div class="order-row">
-                        <span class="label">Color:</span>
-                        <span class="value">${orderData.color}</span>
+                `;
+            } else {
+                // Regular order display
+                orderDetailsDiv.innerHTML = `
+                    <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+                    <div class="order-info">
+                        <div class="order-row">
+                            <span class="label">Product:</span>
+                            <span class="value">${orderData.productName}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Size:</span>
+                            <span class="value">${orderData.size}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Color:</span>
+                            <span class="value">${orderData.color}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Quantity:</span>
+                            <span class="value">${orderData.quantity}</span>
+                        </div>
+                        <div class="order-row">
+                            <span class="label">Total Amount:</span>
+                            <span class="value">${orderData.totalPrice} DH</span>
+                        </div>
                     </div>
-                    <div class="order-row">
-                        <span class="label">Quantity:</span>
-                        <span class="value">${orderData.quantity}</span>
-                    </div>
-                    <div class="order-row">
-                        <span class="label">Total Amount:</span>
-                        <span class="value">${orderData.totalPrice} DH</span>
-                    </div>
-                </div>
-            `;
+                `;
+            }
         }
         
         // Initialize page

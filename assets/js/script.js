@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             setCart(cart);
             updateCartCount();
-            window.location.href = 'cart.html';
+            // Show cart modal instead of redirecting to non-existent cart.html
+            showCartModal();
         });
     }
 
@@ -85,13 +86,36 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!modal) {
             modal = document.createElement('div');
             modal.id = 'sp-cart-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
             modal.innerHTML = `
-                <div class="sp-cart-backdrop"></div>
-                <div class="sp-cart-modal-content">
-                    <h2>Your Cart</h2>
-                    <div class="sp-cart-items"></div>
-                    <button class="btn primary-btn sp-confirm-btn">Confirm Payment</button>
-                    <button class="btn outline-btn sp-close-btn">Close</button>
+                <div style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    position: relative;
+                ">
+                    <h2 style="margin-bottom: 20px; color: var(--primary-color);">Your Cart</h2>
+                    <div class="sp-cart-items" style="margin-bottom: 20px;"></div>
+                    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button class="btn outline-btn sp-close-btn" style="padding: 10px 20px;">Close</button>
+                        <button class="btn primary-btn sp-confirm-btn" style="padding: 10px 20px;">Confirm Order</button>
+                    </div>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -102,20 +126,34 @@ document.addEventListener('DOMContentLoaded', function () {
             itemsDiv.innerHTML = '<p>Your cart is empty.</p>';
         } else {
             itemsDiv.innerHTML = cart.map(item => `
-                <div class="sp-cart-item">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                    border-bottom: 1px solid #eee;
+                    margin-bottom: 10px;
+                ">
                     <img src="${item.img}" alt="${item.title}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;margin-right:10px;">
-                    <span><strong>${item.title}</strong> (${item.size}, <span style="background:${item.color};padding:0 8px;border-radius:8px;"></span>) x${item.qty} - $${item.price}</span>
+                    <div style="flex: 1;">
+                        <strong>${item.title}</strong><br>
+                        <small>Size: ${item.size}, Color: <span style="background:${item.color};padding:0 8px;border-radius:8px;display:inline-block;width:20px;height:20px;"></span></small><br>
+                        <small>Qty: ${item.qty} - ${item.price}</small>
+                    </div>
                 </div>
             `).join('');
         }
         modal.style.display = 'flex';
         // Close
         modal.querySelector('.sp-close-btn').onclick = () => { modal.style.display = 'none'; };
-        modal.querySelector('.sp-cart-backdrop').onclick = () => { modal.style.display = 'none'; };
+        modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
         // Confirm
         modal.querySelector('.sp-confirm-btn').onclick = () => {
             modal.style.display = 'none';
-            window.location.href = 'order-request.html';
+            // Redirect to WhatsApp instead of non-existent order-request.html
+            const whatsappNumber = '212702209437';
+            const message = `Hi! I want to place an order for the items in my cart.`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         };
     }
 
@@ -123,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cartIcon.forEach(icon => {
         icon.addEventListener('click', function (e) {
             e.preventDefault();
-            window.location.href = 'cart.html';
+            showCartModal();
         });
     });
 
@@ -158,6 +196,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const maxPrice = document.getElementById('maxPrice');
         const track = document.querySelector('.price-slider-track');
         const container = document.querySelector('.price-slider-container');
+        
+        if (!minThumb || !maxThumb || !minPrice || !maxPrice || !track || !container) {
+            return; // Exit if elements don't exist
+        }
         
         let isDragging = false;
         let activeThumb = null;
@@ -246,17 +288,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize price range when DOM is loaded
     initPriceRange();
-});
-
-// Cart Modal Styles
-const cartModalStyles = document.createElement('style');
-cartModalStyles.innerHTML = `
-#sp-cart-modal { position:fixed; top:0; left:0; width:100vw; height:100vh; display:none; align-items:center; justify-content:center; z-index:2000; }
-.sp-cart-backdrop { position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); }
-.sp-cart-modal-content { position:relative; background:#fff; border-radius:1rem; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:2rem; min-width:320px; max-width:90vw; z-index:2; }
-.sp-cart-modal-content h2 { margin-bottom:1rem; }
-.sp-cart-items { margin-bottom:1.5rem; }
-.sp-cart-item { display:flex; align-items:center; margin-bottom:0.7rem; font-size:1rem; }
-.sp-confirm-btn { margin-right:1rem; }
-`;
-document.head.appendChild(cartModalStyles); 
+}); 

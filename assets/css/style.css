@@ -1247,6 +1247,32 @@ footer {
     height: 50px;
     font-size: 1.2rem;
   }
+  
+  /* Improve mobile menu visibility */
+  .mobile-menu {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Better touch targets for mobile */
+  .btn, .action-btn, .filter-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve modal on mobile */
+  .modal {
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+  }
+  
+  .modal-body {
+    padding: 15px;
+  }
+  
+  .form-input, .option-select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 /* Extra Small Devices */
@@ -3289,12 +3315,14 @@ footer {
   display: none; /* Hide by default */
   padding: var(--spacing-lg);
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .mobile-menu.open {
   display: block; /* Show when open */
   opacity: 1;
+  visibility: visible;
 }
 
 .mobile-menu-header {

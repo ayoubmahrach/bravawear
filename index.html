@@ -356,7 +356,7 @@
                                 <i class="fas fa-clock"></i> Limited Time
                             </div>
                         </div>
-                        <a href="products.html?category=on-sale" class="btn special-btn">Shop Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="products.html?category=on-sale" class="btn special-btn" onclick="openModalForProduct(20)">Shop Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -579,6 +579,81 @@
         </div>
     </footer>
 
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: none;
+    ">
+        <div class="cart-icon" style="
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 87, 34, 0.3);
+            transition: all 0.3s ease;
+        " onclick="showCartModal()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" style="
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: #e74c3c;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                font-weight: bold;
+            ">0</span>
+        </div>
+    </div>
+
     <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Show floating cart when items are in cart
+        function updateFloatingCart() {
+            const cart = JSON.parse(localStorage.getItem('sp_cart') || '[]');
+            const floatingCart = document.querySelector('.floating-cart');
+            const cartCount = document.querySelector('.floating-cart .cart-count');
+            
+            if (cart.length > 0) {
+                floatingCart.style.display = 'block';
+                cartCount.textContent = cart.reduce((sum, item) => sum + Number(item.qty), 0);
+            } else {
+                floatingCart.style.display = 'none';
+            }
+        }
+        
+        // Update floating cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFloatingCart();
+        });
+        
+        // Update floating cart when cart changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'sp_cart') {
+                updateFloatingCart();
+            }
+        });
+        
+        // Add openModalForProduct function for home page
+        function openModalForProduct(productId) {
+            // Redirect to products page with modal
+            window.location.href = `products.html?modal=${productId}`;
+        }
+    </script>
 </body>
 </html> 
